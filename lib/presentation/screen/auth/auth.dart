@@ -4,11 +4,13 @@ import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/forget_password_container.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/login_container.dart';
-import 'package:ticketban_mobile/presentation/screen/auth/register_container.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/otp_container.dart';
 
 import 'appbar.dart';
 
 class AuthScreen extends StatelessWidget {
+  static const String route = '/auth';
+
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
@@ -47,9 +49,13 @@ class AuthScreen extends StatelessWidget {
                 sizedBoxH24,
                 const Padding(
                   padding: padding24H,
-                  child: ForgetPasswordContainer(),
+                  child: OtpContainer(
+                    title: 'اعتبارسنجی',
+                    desc:
+                        'کد ارسال شده به تلفن خود را جهت اعتبارسنجی وارد کنید',
+                  ),
                 ),
-                sizedBoxH24
+                sizedBoxH24,
               ],
             ),
           ),

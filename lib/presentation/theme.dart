@@ -22,6 +22,7 @@ class AppThemeConfig {
   final Color onSurface;
   final Color divider;
   final Color icon;
+  final Color primaryV;
 
   AppThemeConfig.light()
       : brightness = Brightness.light,
@@ -33,18 +34,19 @@ class AppThemeConfig {
         onSecondary = LightColorPalette.whiteCard,
         onSurface = LightColorPalette.blackTextColor,
         divider = LightColorPalette.grey,
+        primaryV = LightColorPalette.darkBlue,
         icon = LightColorPalette.blackTextColor;
 
   ThemeData getTheme() {
     return ThemeData(
       colorScheme: ColorScheme.light(
-        primary: primary,
-        surface: surface,
-        onPrimary: onPrimary,
-        secondary: onSecondary,
-        background: background,
-        onSecondary: onSecondary,
-      ),
+          primary: primary,
+          surface: surface,
+          onPrimary: onPrimary,
+          secondary: onSecondary,
+          background: background,
+          onSecondary: onSecondary,
+          primaryContainer: primaryV),
       textTheme: TextTheme(
         bodyText2: defaultTextStyle.copyWith(color: onPrimary),
         headline5: defaultTextStyle.copyWith(

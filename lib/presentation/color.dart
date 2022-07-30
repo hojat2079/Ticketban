@@ -6,6 +6,7 @@ class LightColorPalette {
   static const blackTextColor = Color(0xff626262);
   static const black = Color(0xff292D32);
   static const blue = Color(0xff2C6DF8);
+  static const darkBlue = Color(0xff1529CE);
   static const purple = Color(0xff6542D0);
   static const greenBlue = Color(0xff58C7D5);
   static const grey = Color(0xff8F8F8F);
