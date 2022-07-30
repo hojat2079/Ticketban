@@ -16,9 +16,9 @@ class LightColorPalette {
   static const yellow = Color(0xffFFC24B);
 
   static const Gradient defaultTextGradiant = LinearGradient(
-    begin: Alignment.centerRight,
-    end: Alignment.centerLeft,
-    stops: [0.02, 0.1, 0.4],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    stops: [0.02, 0.3, 0.9],
     colors: [
       Color(0xff6914CD),
       Color(0xff2C6DF8),

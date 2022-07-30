@@ -13,8 +13,9 @@ class RegisterContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final Size size = MediaQuery.of(context).size;
     return Container(
-      width: MediaQuery.of(context).size.width,
+      width: size.width,
       decoration: BoxDecoration(
         color: themeData.colorScheme.surface,
         borderRadius: circular32,

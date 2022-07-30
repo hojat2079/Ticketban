@@ -29,13 +29,12 @@ class AppBarAuth extends StatelessWidget {
         children: [
           Assets.image.svg.logo.svg(),
           sizedBoxW8,
-          Expanded(
-            child: GradientText(
-              'تیکت بان',
-              gradient: LightColorPalette.defaultTextGradiant,
-              style: themeData.textTheme.headline5,
-            ),
+          GradientText(
+            'تیکت بان',
+            gradient: LightColorPalette.defaultTextGradiant,
+            style: themeData.textTheme.headline5,
           ),
+          const Spacer(),
           GradiantButton(
             label: text,
             onTap: () {},
