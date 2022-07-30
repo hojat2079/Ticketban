@@ -30,8 +30,8 @@ class ForgetPasswordContainer extends StatelessWidget {
               headText,
               style: themeData.textTheme.headline4,
             ),
-            sizedBoxH32,
-            Text('شماره تلفن خود را جهت ارسال کد بازیابی وارد کنید'),
+            sizedBoxH24,
+            const Text('شماره تلفن خود را جهت ارسال کد بازیابی وارد کنید'),
             sizedBoxH24,
             CustomTextField(
               keyboardType: TextInputType.phone,
