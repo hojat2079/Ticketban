@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/forget_password_container.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/login_container.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/register_container.dart';
 
@@ -46,7 +47,7 @@ class AuthScreen extends StatelessWidget {
                 sizedBoxH24,
                 const Padding(
                   padding: padding24H,
-                  child: LoginContainer(),
+                  child: ForgetPasswordContainer(),
                 ),
                 sizedBoxH24
               ],

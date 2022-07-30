@@ -22,6 +22,7 @@ const sizedBoxH16 = SizedBox(height: 16);
 const sizedBoxH24 = SizedBox(height: 24);
 const sizedBoxH20 = SizedBox(height: 20);
 const sizedBoxH36 = SizedBox(height: 36);
+const sizedBoxH32 = SizedBox(height: 32);
 
 //size
 const Size buttonSize = Size(96, 44);
