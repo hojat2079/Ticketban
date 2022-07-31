@@ -5,16 +5,16 @@ import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
 
-class ForgetPasswordContainer extends StatefulWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   static const headText = 'فراموشی رمز عبور';
-  const ForgetPasswordContainer({Key? key}) : super(key: key);
+  static const route = '/forget-password';
+  const ForgetPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<ForgetPasswordContainer> createState() =>
-      _ForgetPasswordContainerState();
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
-class _ForgetPasswordContainerState extends State<ForgetPasswordContainer> {
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final TextEditingController _passwordController = TextEditingController();
   @override
   void dispose() {
@@ -40,7 +40,7 @@ class _ForgetPasswordContainerState extends State<ForgetPasswordContainer> {
           children: [
             sizedBoxH20,
             Text(
-              ForgetPasswordContainer.headText,
+              ForgetPasswordScreen.headText,
               style: themeData.textTheme.headline4,
             ),
             sizedBoxH24,

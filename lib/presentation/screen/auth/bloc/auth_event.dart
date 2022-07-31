@@ -4,12 +4,32 @@ abstract class AuthEvent extends Equatable {
   const AuthEvent();
 }
 
-class AuthStarted extends AuthEvent {
+class AuthLoginStarted extends AuthEvent {
   @override
   List<Object> get props => [];
 }
 
+class AuthLoginClicked extends AuthEvent {
+  final String password;
+  final String phone;
+
+  const AuthLoginClicked({
+    required this.password,
+    required this.phone,
+  });
+
+  @override
+  List<Object> get props => [password, phone];
+}
+
 class AuthRegisterButtonClickedInLoginPage extends AuthEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class AuthLoginButtonClickedInRegisterPage extends AuthEvent {
+  const AuthLoginButtonClickedInRegisterPage();
+
   @override
   List<Object> get props => [];
 }
@@ -34,19 +54,6 @@ class AuthForgetPasswordClicked extends AuthEvent {
 
   @override
   List<Object> get props => [];
-}
-
-class AuthLoginClicked extends AuthEvent {
-  final String password;
-  final String phone;
-
-  const AuthLoginClicked({
-    required this.password,
-    required this.phone,
-  });
-
-  @override
-  List<Object> get props => [password, phone];
 }
 
 class AuthOtpClicked extends AuthEvent {

@@ -39,7 +39,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<AuthResponse> register(RegisterRequest registerRequest) async {
     final response = await dio.post(
-      Constant.loginUrl,
+      Constant.registerUrl,
       data: registerRequest.toMap(),
     );
     validateResponse(response);

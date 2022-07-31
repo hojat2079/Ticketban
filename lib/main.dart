@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/di/app.dart';
 import 'package:ticketban_mobile/presentation/route.dart';
-import 'package:ticketban_mobile/presentation/screen/auth/auth.dart';
 import 'package:ticketban_mobile/presentation/theme.dart';
 
 void main() async {

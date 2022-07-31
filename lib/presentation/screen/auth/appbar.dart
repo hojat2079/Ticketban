@@ -9,11 +9,13 @@ import 'package:ticketban_mobile/presentation/component/widget/gradiant_text.dar
 class AppBarAuth extends StatelessWidget {
   final String text;
   final Gradient gradient;
+  final Function() onTap;
 
   const AppBarAuth({
     Key? key,
     required this.text,
     required this.gradient,
+    required this.onTap,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,7 @@ class AppBarAuth extends StatelessWidget {
           const Spacer(),
           GradiantButton(
             label: text,
-            onTap: () {},
+            onTap: onTap,
             gradient: gradient,
             textStyle: themeData.textTheme.button,
           ),

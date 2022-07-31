@@ -14,10 +14,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   AuthBloc({required this.authRepository}) : super(const AuthLogin()) {
     on<AuthEvent>((event, emit) async {
-      if (event is AuthStarted) {
+      if (event is AuthLoginStarted) {
         emitLoginStateWithAuthStarted(emit);
       } else if (event is AuthRegisterButtonClickedInLoginPage) {
         emitRegisterStateWithAuthRegisterButtonClickedInLoginPage(emit);
+      } else if (event is AuthLoginButtonClickedInRegisterPage) {
+        emitLoginStateWithAuthStarted(emit);
       } else if (event is AuthRegisterClicked) {
         await emitOtpStateWithAuthRegisterClicked(
             emit, event.name, event.password, event.phone);
@@ -53,6 +55,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     String phone,
   ) async {
     try {
+      emit(const AuthLoading());
       await authRepository.register(RegisterRequest.withPhone(
         familyName: name.split(' ')[1],
         password: password,
@@ -61,7 +64,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       ));
       emit(const AuthOtp());
     } catch (ex) {
-      emit(AuthErrorState(ex is CustomError ? ex : CustomError(), false));
+      emit(AuthErrorState(ex is CustomError ? ex : CustomError()));
     }
   }
 
@@ -71,13 +74,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     String phone,
   ) async {
     try {
+      emit(const AuthLoading());
       await authRepository.login(LoginRequest.withPhone(
         password: password,
         phoneNumber: phone,
       ));
       emit(const AuthSuccess());
     } catch (ex) {
-      emit(AuthErrorState(ex is CustomError ? ex : CustomError(), true));
+      emit(AuthErrorState(ex is CustomError ? ex : CustomError()));
     }
   }
 
@@ -86,10 +90,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     String otp,
   ) async {
     try {
+      emit(const AuthLoading());
       await authRepository.verifyOtp(otp);
       emit(const AuthSuccess());
     } catch (ex) {
-      emit(AuthErrorState(ex is CustomError ? ex : CustomError(), false));
+      emit(AuthErrorState(ex is CustomError ? ex : CustomError()));
     }
   }
 }

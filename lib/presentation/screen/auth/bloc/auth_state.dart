@@ -1,27 +1,25 @@
 part of 'auth_bloc.dart';
 
 abstract class AuthState extends Equatable {
-  final bool isLogin;
-
-  const AuthState(this.isLogin);
+  const AuthState();
 }
 
 class AuthLogin extends AuthState {
   @override
   List<Object> get props => [];
 
-  const AuthLogin() : super(true);
+  const AuthLogin();
 }
 
 class AuthRegister extends AuthState {
   @override
   List<Object> get props => [];
 
-  const AuthRegister() : super(false);
+  const AuthRegister();
 }
 
 class AuthForgetPassword extends AuthState {
-  const AuthForgetPassword() : super(false);
+  const AuthForgetPassword();
 
   @override
   List<Object> get props => [];
@@ -34,21 +32,21 @@ class AuthForgetPasswordOtp extends AuthState {
   @override
   List<Object> get props => [];
 
-  const AuthForgetPasswordOtp() : super(false);
+  const AuthForgetPasswordOtp();
 }
 
 class AuthOtp extends AuthState {
   static const title = 'اعتبارسنجی';
   static const desc = 'کد ارسال شده به تلفن خود را جهت اعتبارسنجی وارد کنید';
 
-  const AuthOtp() : super(false);
+  const AuthOtp();
 
   @override
   List<Object> get props => [];
 }
 
 class AuthSuccess extends AuthState {
-  const AuthSuccess() : super(false);
+  const AuthSuccess();
 
   @override
   List<Object> get props => [];
@@ -57,8 +55,15 @@ class AuthSuccess extends AuthState {
 class AuthErrorState extends AuthState {
   final CustomError error;
 
-  const AuthErrorState(this.error, super.isLogin);
+  const AuthErrorState(this.error);
 
   @override
   List<Object> get props => [error];
+}
+
+class AuthLoading extends AuthState {
+  const AuthLoading();
+
+  @override
+  List<Object> get props => [];
 }

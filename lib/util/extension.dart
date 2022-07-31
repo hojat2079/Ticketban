@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 extension NumberStringFormat on String {
   String toFaNumber() {
     return replaceAll('1', '۱')
@@ -18,5 +20,16 @@ extension NumberIntFormat on int {
     String min = (this ~/ 60).toString().padLeft(2, '0');
     String sec = (this % 60).toString().padLeft(2, '0');
     return '$min:$sec'.toFaNumber();
+  }
+}
+
+extension ShowView on BuildContext {
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(
+      String message) {
+    return ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Text(message),
+      ),
+    );
   }
 }

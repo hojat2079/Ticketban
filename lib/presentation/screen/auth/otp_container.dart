@@ -8,22 +8,23 @@ import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
 import 'package:ticketban_mobile/util/extension.dart';
 
-class OtpContainer extends StatefulWidget {
+class OtpScreen extends StatefulWidget {
   final String title;
   final String desc;
   static const Color endButtonColor = Color(0xff2872FB);
+  static const String route = '/otp';
 
-  const OtpContainer({
+  const OtpScreen({
     Key? key,
     required this.title,
     required this.desc,
   }) : super(key: key);
 
   @override
-  State<OtpContainer> createState() => _OtpContainerState();
+  State<OtpScreen> createState() => _OtpScreenState();
 }
 
-class _OtpContainerState extends State<OtpContainer> {
+class _OtpScreenState extends State<OtpScreen> {
   Timer? _timer;
   int _currentTime = 120;
   bool _timeOut = false;
@@ -110,7 +111,7 @@ class _OtpContainerState extends State<OtpContainer> {
       child: ElevatedButton(
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(
-            OtpContainer.endButtonColor,
+            OtpScreen.endButtonColor,
           ),
           shape: MaterialStateProperty.all(
             const RoundedRectangleBorder(
