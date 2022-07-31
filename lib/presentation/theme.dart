@@ -39,38 +39,41 @@ class AppThemeConfig {
 
   ThemeData getTheme() {
     return ThemeData(
-      colorScheme: ColorScheme.light(
-          primary: primary,
-          surface: surface,
-          onPrimary: onPrimary,
-          secondary: onSecondary,
-          background: background,
-          onSecondary: onSecondary,
-          primaryContainer: primaryV),
-      textTheme: TextTheme(
-        bodyText2: defaultTextStyle.copyWith(color: onPrimary),
-        headline5: defaultTextStyle.copyWith(
-          color: onSurface,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
+        colorScheme: ColorScheme.light(
+            primary: primary,
+            surface: surface,
+            onPrimary: onPrimary,
+            secondary: onSecondary,
+            background: background,
+            onSecondary: onSecondary,
+            primaryContainer: primaryV),
+        textTheme: TextTheme(
+          bodyText2: defaultTextStyle.copyWith(color: onPrimary),
+          headline5: defaultTextStyle.copyWith(
+            color: onSurface,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+          headline4: defaultTextStyle.copyWith(
+            color: onSurface,
+            fontSize: 21,
+            fontWeight: FontWeight.w700,
+          ),
+          button: defaultTextStyle.copyWith(
+            color: onSecondary,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
         ),
-        headline4: defaultTextStyle.copyWith(
-          color: onSurface,
-          fontSize: 21,
-          fontWeight: FontWeight.w700,
+        dividerColor: divider,
+        dividerTheme: DividerThemeData(
+          color: divider,
+          space: dividerSize,
         ),
-        button: defaultTextStyle.copyWith(
-          color: onSecondary,
-          fontSize: 18,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
-      dividerColor: divider,
-      dividerTheme: DividerThemeData(
-        color: divider,
-        space: dividerSize,
-      ),
-      iconTheme: IconThemeData(color: icon, size: 24),
-    );
+        iconTheme: IconThemeData(color: icon, size: 24),
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: onPrimary,
+          contentTextStyle: defaultTextStyle.copyWith(color: onSecondary),
+        ));
   }
 }

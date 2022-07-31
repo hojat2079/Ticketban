@@ -5,9 +5,22 @@ import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
 
-class ForgetPasswordContainer extends StatelessWidget {
+class ForgetPasswordContainer extends StatefulWidget {
   static const headText = 'فراموشی رمز عبور';
   const ForgetPasswordContainer({Key? key}) : super(key: key);
+
+  @override
+  State<ForgetPasswordContainer> createState() =>
+      _ForgetPasswordContainerState();
+}
+
+class _ForgetPasswordContainerState extends State<ForgetPasswordContainer> {
+  final TextEditingController _passwordController = TextEditingController();
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +40,14 @@ class ForgetPasswordContainer extends StatelessWidget {
           children: [
             sizedBoxH20,
             Text(
-              headText,
+              ForgetPasswordContainer.headText,
               style: themeData.textTheme.headline4,
             ),
             sizedBoxH24,
             const Text('شماره تلفن خود را جهت ارسال کد بازیابی وارد کنید'),
             sizedBoxH24,
             CustomTextField(
+              controller: _passwordController,
               keyboardType: TextInputType.phone,
               hint: 'شماره تلفن',
               prefixIcon: Padding(

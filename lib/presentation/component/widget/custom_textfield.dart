@@ -10,9 +10,11 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.isPassword = false,
+    required this.controller,
   }) : super(key: key);
 
   final bool obscure = false;
+  final TextEditingController controller;
   final int? maxLength;
   final TextInputType keyboardType;
   final String hint;
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
     final ThemeData themeData = Theme.of(context);
     return TextField(
       style: themeData.textTheme.bodyText2,
+      controller: controller,
       maxLines: 1,
       maxLength: maxLength,
       keyboardType: keyboardType,

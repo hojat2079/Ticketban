@@ -1,15 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_text.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/bloc/auth_bloc.dart';
 
-class LoginContainer extends StatelessWidget {
+class LoginContainer extends StatefulWidget {
   static const String headText = 'ورود';
 
   const LoginContainer({Key? key}) : super(key: key);
+
+  @override
+  State<LoginContainer> createState() => _LoginContainerState();
+}
+
+class _LoginContainerState extends State<LoginContainer> {
+  final TextEditingController _passwordController =
+      TextEditingController(text: '777737777');
+  final TextEditingController _phoneController =
+      TextEditingController(text: '09338503698');
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _phoneController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +65,7 @@ class LoginContainer extends StatelessWidget {
             ),
             sizedBoxH24,
             CustomTextField(
+              controller: _phoneController,
               keyboardType: TextInputType.phone,
               hint: 'شماره تلفن',
               prefixIcon: Padding(
@@ -56,6 +76,7 @@ class LoginContainer extends StatelessWidget {
             ),
             sizedBoxH16,
             CustomTextField(
+              controller: _passwordController,
               hint: 'رمز عبور',
               isPassword: true,
               prefixIcon: Padding(
@@ -90,12 +111,21 @@ class LoginContainer extends StatelessWidget {
                 ),
                 GradiantButton(
                   gradient: LightColorPalette.loginButtonTextGradiant,
-                  onTap: () {},
-                  label: headText,
+                  onTap: () {
+                    context.read<AuthBloc>().add(AuthLoginClicked(
+                          password: _passwordController.text,
+                          phone: _phoneController.text,
+                        ));
+                  },
+                  label: LoginContainer.headText,
                   textStyle: themeData.textTheme.button,
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<AuthBloc>().add(
+                          const AuthForgetPasswordClicked(),
+                        );
+                  },
                   child: Text(
                     'فراموشی رمز عبور',
                     style: themeData.textTheme.bodyText2!.apply(

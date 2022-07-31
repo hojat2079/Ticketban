@@ -1,14 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/bloc/auth_bloc.dart';
 
-class RegisterContainer extends StatelessWidget {
+class RegisterContainer extends StatefulWidget {
   static const String headText = 'ثبت نام';
 
   const RegisterContainer({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterContainer> createState() => _RegisterContainerState();
+}
+
+class _RegisterContainerState extends State<RegisterContainer> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _phoneController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +47,12 @@ class RegisterContainer extends StatelessWidget {
           children: [
             sizedBoxH20,
             Text(
-              headText,
+              RegisterContainer.headText,
               style: themeData.textTheme.headline4,
             ),
             sizedBoxH24,
             CustomTextField(
+              controller: _nameController,
               hint: 'نام و نام خانوادگی',
               prefixIcon: Padding(
                 padding: paddingSuffixIcon,
@@ -41,6 +61,7 @@ class RegisterContainer extends StatelessWidget {
             ),
             sizedBoxH16,
             CustomTextField(
+              controller: _phoneController,
               keyboardType: TextInputType.phone,
               hint: 'شماره تلفن',
               prefixIcon: Padding(
@@ -51,6 +72,7 @@ class RegisterContainer extends StatelessWidget {
             ),
             sizedBoxH16,
             CustomTextField(
+              controller: _passwordController,
               hint: 'رمز عبور',
               isPassword: true,
               prefixIcon: Padding(
@@ -69,8 +91,16 @@ class RegisterContainer extends StatelessWidget {
             sizedBoxH24,
             GradiantButton(
               gradient: LightColorPalette.registerButtonTextGradiant,
-              onTap: () {},
-              label: headText,
+              onTap: () {
+                context.read<AuthBloc>().add(
+                      AuthRegisterClicked(
+                        name: _nameController.text,
+                        password: _passwordController.text,
+                        phone: _phoneController.text,
+                      ),
+                    );
+              },
+              label: RegisterContainer.headText,
               textStyle: themeData.textTheme.button,
             ),
             sizedBoxH24,

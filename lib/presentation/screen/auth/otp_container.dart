@@ -27,6 +27,7 @@ class _OtpContainerState extends State<OtpContainer> {
   Timer? _timer;
   int _currentTime = 120;
   bool _timeOut = false;
+  final TextEditingController _otpController = TextEditingController();
 
   @override
   void initState() {
@@ -37,6 +38,7 @@ class _OtpContainerState extends State<OtpContainer> {
   @override
   void dispose() {
     _timer?.cancel();
+    _otpController.dispose();
     super.dispose();
   }
 
@@ -68,6 +70,7 @@ class _OtpContainerState extends State<OtpContainer> {
             ),
             sizedBoxH24,
             CustomTextField(
+              controller: _otpController,
               keyboardType: TextInputType.phone,
               hint: 'کد اعتبارسنجی ۶ رقمی',
               prefixIcon: Padding(
@@ -75,7 +78,7 @@ class _OtpContainerState extends State<OtpContainer> {
                 child: Assets.image.svg.password.svg(),
               ),
               suffixIcon: _timeOut ? _endButton(themeData) : null,
-              maxLength: 6,
+              maxLength: 4,
             ),
             sizedBoxH16,
             Text(
