@@ -23,6 +23,7 @@ const EdgeInsets padding36H = EdgeInsets.symmetric(horizontal: 36);
 const EdgeInsets padding36 = EdgeInsets.symmetric(horizontal: 36, vertical: 36);
 const EdgeInsets padding0 = EdgeInsets.zero;
 const EdgeInsets paddingSuffixIcon = EdgeInsets.only(left: 8, right: 12);
+const EdgeInsets padding4R = EdgeInsets.only(right: 4);
 
 //sizedBox
 const sizedBoxW4 = SizedBox(width: 4);

@@ -58,7 +58,7 @@ class GradiantButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: textStyle,
                 ),
-                if (icon != null) sizedBoxW12,
+                if (icon != null) sizedBoxW8,
                 if (icon != null) icon!,
               ],
             ),

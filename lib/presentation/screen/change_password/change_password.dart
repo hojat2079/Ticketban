@@ -21,6 +21,7 @@ class ChangePasswordScreen extends StatelessWidget {
       statusBarIconBrightness: Brightness.dark,
     ));
     return Scaffold(
+      backgroundColor: themeData.colorScheme.surfaceVariant,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -36,9 +37,12 @@ class ChangePasswordScreen extends StatelessWidget {
                   style: themeData.textTheme.headline2,
                 ),
                 sizedBoxH32,
-                Text(
-                  'کلمه عبور فعلی را وارد کنید:',
-                  style: themeData.textTheme.subtitle2,
+                Padding(
+                  padding: padding4R,
+                  child: Text(
+                    'کلمه عبور فعلی را وارد کنید:',
+                    style: themeData.textTheme.subtitle2,
+                  ),
                 ),
                 sizedBoxH12,
                 CustomTextField(
@@ -51,9 +55,12 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                 ),
                 sizedBoxH24,
-                Text(
-                  'کلمه عبور جدید را وارد کنید:',
-                  style: themeData.textTheme.subtitle2,
+                Padding(
+                  padding: padding4R,
+                  child: Text(
+                    'کلمه عبور جدید را وارد کنید:',
+                    style: themeData.textTheme.subtitle2,
+                  ),
                 ),
                 sizedBoxH12,
                 CustomTextField(
@@ -65,9 +72,12 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                 ),
                 sizedBoxH24,
-                Text(
-                  'کلمه عبور جدید را مجددا وارد کنید:',
-                  style: themeData.textTheme.subtitle2,
+                Padding(
+                  padding: padding4R,
+                  child: Text(
+                    'کلمه عبور جدید را مجددا وارد کنید:',
+                    style: themeData.textTheme.subtitle2,
+                  ),
                 ),
                 sizedBoxH12,
                 CustomTextField(

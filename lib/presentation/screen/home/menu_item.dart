@@ -29,7 +29,7 @@ class CustomMenuItem extends StatelessWidget {
               )
             ],
             borderRadius: circular28,
-            color: themeData.colorScheme.surface,
+            color: themeData.colorScheme.surfaceVariant,
           ),
           child: Row(
             children: [

@@ -23,11 +23,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: themeData.colorScheme.surface,
+      statusBarColor: themeData.colorScheme.surfaceVariant,
       statusBarIconBrightness: Brightness.dark,
     ));
     return Scaffold(
-      backgroundColor: themeData.colorScheme.surface,
+      backgroundColor: themeData.colorScheme.surfaceVariant,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(

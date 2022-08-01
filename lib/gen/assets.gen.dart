@@ -37,11 +37,17 @@ class $AssetsImageSvgGen {
   SvgGenImage get allTicket =>
       const SvgGenImage('assets/image/svg/all_ticket.svg');
 
+  /// File path: assets/image/svg/arrow.svg
+  SvgGenImage get arrow => const SvgGenImage('assets/image/svg/arrow.svg');
+
   /// File path: assets/image/svg/check.svg
   SvgGenImage get check => const SvgGenImage('assets/image/svg/check.svg');
 
   /// File path: assets/image/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/image/svg/exit.svg');
+
+  /// File path: assets/image/svg/file.svg
+  SvgGenImage get file => const SvgGenImage('assets/image/svg/file.svg');
 
   /// File path: assets/image/svg/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/image/svg/lock.svg');
@@ -66,6 +72,9 @@ class $AssetsImageSvgGen {
 
   /// File path: assets/image/svg/phone.svg
   SvgGenImage get phone => const SvgGenImage('assets/image/svg/phone.svg');
+
+  /// File path: assets/image/svg/send.svg
+  SvgGenImage get send => const SvgGenImage('assets/image/svg/send.svg');
 }
 
 class Assets {

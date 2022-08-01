@@ -32,7 +32,7 @@ class AvatarWidget extends StatelessWidget {
       child: Container(
         padding: padding12,
         decoration: BoxDecoration(
-          color: themeData.colorScheme.surface,
+          color: themeData.colorScheme.surfaceVariant,
           shape: BoxShape.circle,
         ),
         child: Container(
@@ -44,7 +44,7 @@ class AvatarWidget extends StatelessWidget {
           child: Container(
             padding: padding12,
             decoration: BoxDecoration(
-              color: themeData.colorScheme.surface,
+              color: themeData.colorScheme.surfaceVariant,
               shape: BoxShape.circle,
             ),
             child: Image.asset(imagePath),
