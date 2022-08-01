@@ -37,8 +37,14 @@ class $AssetsImageSvgGen {
   SvgGenImage get allTicket =>
       const SvgGenImage('assets/image/svg/all_ticket.svg');
 
+  /// File path: assets/image/svg/check.svg
+  SvgGenImage get check => const SvgGenImage('assets/image/svg/check.svg');
+
   /// File path: assets/image/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/image/svg/exit.svg');
+
+  /// File path: assets/image/svg/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/image/svg/lock.svg');
 
   /// File path: assets/image/svg/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/image/svg/logo.svg');

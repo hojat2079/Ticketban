@@ -64,4 +64,13 @@ class LightColorPalette {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  static const defaultOkButton = LinearGradient(
+    colors: [
+      Color(0xff001A16),
+      Color(0xff54E8D6),
+    ],
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+  );
 }

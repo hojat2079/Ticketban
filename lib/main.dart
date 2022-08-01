@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/di/app.dart';
 import 'package:ticketban_mobile/presentation/route.dart';
+import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home.dart';
 import 'package:ticketban_mobile/presentation/theme.dart';
 
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       // onGenerateRoute: _appRoute.onGenerateRoute,
       home: const Directionality(
         textDirection: TextDirection.rtl,
-        child: HomeScreen(),
+        child: ChangePasswordScreen(),
       ),
     );
   }

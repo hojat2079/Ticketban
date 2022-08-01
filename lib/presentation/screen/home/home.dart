@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
+import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/avatar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/menu_item.dart';
@@ -63,14 +64,16 @@ class HomeScreen extends StatelessWidget {
                 CustomMenuItem(
                   icon: Assets.image.svg.passwordItem.svg(),
                   text: Text(item3, style: themeData.textTheme.subtitle1),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, ChangePasswordScreen.route);
+                  },
                 ),
                 sizedBoxH20,
                 CustomMenuItem(
                   icon: Assets.image.svg.exit.svg(),
                   text: Text(item4, style: themeData.textTheme.subtitle1),
-                  onTap: () {
-                    showCustomDialog(
+                  onTap: () async {
+                    await showCustomDialog(
                         context: context,
                         title: 'آیا از خروج خود اطمینان دارید؟',
                         themeData: themeData);
@@ -88,9 +91,10 @@ class HomeScreen extends StatelessWidget {
     required BuildContext context,
     required String title,
     required ThemeData themeData,
-  }) {
-    showDialog(
+  }) async {
+    await showDialog(
       context: context,
+      barrierColor: null,
       builder: (context) {
         return Directionality(
           textDirection: TextDirection.rtl,

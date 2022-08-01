@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 const BorderRadius circular32 = BorderRadius.all(Radius.circular(32));
 const BorderRadius circular28 = BorderRadius.all(Radius.circular(28));
 const BorderRadius circular16 = BorderRadius.all(Radius.circular(16));
+const BorderRadius circular18 = BorderRadius.all(Radius.circular(18));
 const BorderRadius circular10 = BorderRadius.all(Radius.circular(10));
 const BorderRadius circular14 = BorderRadius.all(Radius.circular(14));
 const BorderRadius circular21 = BorderRadius.all(Radius.circular(21));
@@ -37,7 +38,11 @@ const sizedBoxH32 = SizedBox(height: 32);
 const sizedBoxH48 = SizedBox(height: 48);
 
 //size
-const Size buttonSize = Size(96, 44);
+const Size authButtonSize = Size(96, 44);
+const double authButtonSizeWidth = 96;
+const double authButtonSizeHeight = 44;
+const double homeButtonSizeWidth = 120;
+const double homeButtonSizeHeight = 50;
 const Size size0 = Size(0, 0);
 const double dividerSize = 1;
 const double iconSize = 20;

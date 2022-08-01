@@ -7,6 +7,7 @@ import 'package:ticketban_mobile/presentation/screen/auth/forget_password_screen
 import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/otp_container.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/register_screen.dart';
+import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home.dart';
 
 class AppRoute {
@@ -88,6 +89,13 @@ class AppRoute {
           return const Directionality(
             textDirection: TextDirection.rtl,
             child: HomeScreen(),
+          );
+        });
+      case ChangePasswordScreen.route:
+        return MaterialPageRoute(builder: (context) {
+          return const Directionality(
+            textDirection: TextDirection.rtl,
+            child: ChangePasswordScreen(),
           );
         });
       default:

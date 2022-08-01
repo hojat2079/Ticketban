@@ -36,7 +36,7 @@ class AppThemeConfig {
         onSurface = LightColorPalette.blackTextColor,
         divider = LightColorPalette.grey,
         primaryV = LightColorPalette.darkBlue,
-        icon = LightColorPalette.blackTextColor,
+        icon = LightColorPalette.white,
         inverseSurface = LightColorPalette.whiteShadow;
 
   ThemeData getTheme() {
@@ -52,7 +52,7 @@ class AppThemeConfig {
             inverseSurface: inverseSurface,
             onSurface: onSurface),
         textTheme: TextTheme(
-          bodyText2: defaultTextStyle.copyWith(color: onPrimary),
+          bodyText2: defaultTextStyle,
           headline6: defaultTextStyle.copyWith(
             color: onSurface,
             fontSize: 16,
@@ -68,8 +68,19 @@ class AppThemeConfig {
             fontSize: 24,
             fontWeight: FontWeight.w800,
           ),
+          headline2: defaultTextStyle.copyWith(
+            color: onSurface,
+            fontSize: 32,
+            fontWeight: FontWeight.w800,
+          ),
           subtitle1: defaultTextStyle.copyWith(
+            color: onSurface,
             fontSize: 18,
+          ),
+          subtitle2: defaultTextStyle.copyWith(
+            color: onSurface,
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
           ),
           headline4: defaultTextStyle.copyWith(
             color: onSurface,

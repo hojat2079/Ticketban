@@ -116,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 hint: 'شماره تلفن',
                 prefixIcon: Padding(
                   padding: paddingSuffixIcon,
-                  child: Assets.image.svg.phone.svg(),
+                  child: Assets.image.svg.phone.svg(width: 24),
                 ),
                 maxLength: 11,
               ),
@@ -127,7 +127,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 isPassword: true,
                 prefixIcon: Padding(
                   padding: paddingSuffixIcon,
-                  child: Assets.image.svg.password.svg(),
+                  child: Assets.image.svg.password.svg(width: 24),
                 ),
                 suffixIcon: InkWell(
                   customBorder: const CircleBorder(),
