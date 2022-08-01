@@ -22,7 +22,7 @@ class AppBarAuth extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
     return Container(
-      padding: appbarPadding,
+      padding: appbarAuthPadding,
       decoration: BoxDecoration(
         borderRadius: circular32,
         color: themeData.colorScheme.surface,

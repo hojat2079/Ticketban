@@ -23,6 +23,7 @@ class AppThemeConfig {
   final Color divider;
   final Color icon;
   final Color primaryV;
+  final Color inverseSurface;
 
   AppThemeConfig.light()
       : brightness = Brightness.light,
@@ -35,7 +36,8 @@ class AppThemeConfig {
         onSurface = LightColorPalette.blackTextColor,
         divider = LightColorPalette.grey,
         primaryV = LightColorPalette.darkBlue,
-        icon = LightColorPalette.blackTextColor;
+        icon = LightColorPalette.blackTextColor,
+        inverseSurface = LightColorPalette.whiteShadow;
 
   ThemeData getTheme() {
     return ThemeData(
@@ -46,13 +48,28 @@ class AppThemeConfig {
             secondary: onSecondary,
             background: background,
             onSecondary: onSecondary,
-            primaryContainer: primaryV),
+            primaryContainer: primaryV,
+            inverseSurface: inverseSurface,
+            onSurface: onSurface),
         textTheme: TextTheme(
           bodyText2: defaultTextStyle.copyWith(color: onPrimary),
+          headline6: defaultTextStyle.copyWith(
+            color: onSurface,
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+          ),
           headline5: defaultTextStyle.copyWith(
             color: onSurface,
             fontSize: 18,
             fontWeight: FontWeight.w700,
+          ),
+          headline3: defaultTextStyle.copyWith(
+            color: onSurface,
+            fontSize: 24,
+            fontWeight: FontWeight.w800,
+          ),
+          subtitle1: defaultTextStyle.copyWith(
+            fontSize: 18,
           ),
           headline4: defaultTextStyle.copyWith(
             color: onSurface,

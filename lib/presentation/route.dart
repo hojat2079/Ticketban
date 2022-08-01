@@ -85,7 +85,10 @@ class AppRoute {
         );
       case HomeScreen.route:
         return MaterialPageRoute(builder: (context) {
-          return const HomeScreen();
+          return const Directionality(
+            textDirection: TextDirection.rtl,
+            child: HomeScreen(),
+          );
         });
       default:
         throw Exception('root is not valid');

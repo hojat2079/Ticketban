@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class LightColorPalette {
   static const whiteCard = Color(0xffF4F4F4);
   static const white = Colors.white;
+  static Color whiteShadow = const Color(0xff7A7A7A).withOpacity(0.15);
   static const blackTextColor = Color(0xff626262);
   static const black = Color(0xff292D32);
   static const blue = Color(0xff2C6DF8);
@@ -15,6 +16,7 @@ class LightColorPalette {
   static const darkRed = Color(0xffE52323);
   static const green = Color(0xff00B7A1);
   static const yellow = Color(0xffFFC24B);
+  static const dialogTextColor = Color(0xff3A3A3A);
 
   static const Gradient defaultTextGradiant = LinearGradient(
     begin: Alignment.topRight,
@@ -42,5 +44,24 @@ class LightColorPalette {
       Color(0xff152BCD),
       Color(0xff1427CD),
     ],
+  );
+
+  static const defaultOuterGradiantAvatar = LinearGradient(
+    colors: [
+      Color(0xff1427CD),
+      Color(0xffFFFFFF),
+      Color(0xffCD14BA),
+    ],
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+  );
+  static const defaultInnerGradiantAvatar = LinearGradient(
+    colors: [
+      Color(0xff54E8D6),
+      Color(0xffFFFFFF),
+      Color(0xff6914CD),
+    ],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
   );
 }
