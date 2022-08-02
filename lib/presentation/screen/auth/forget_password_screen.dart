@@ -52,7 +52,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
               hint: 'شماره تلفن',
               prefixIcon: Padding(
                 padding: paddingSuffixIcon,
-                child: Assets.image.svg.phone.svg(),
+                child: Assets.image.svg.phone.svg(width: 24),
               ),
               maxLength: 11,
             ),

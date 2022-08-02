@@ -94,7 +94,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hint: 'نام و نام خانوادگی',
                     prefixIcon: Padding(
                       padding: paddingSuffixIcon,
-                      child: Assets.image.svg.person.svg(),
+                      child: Assets.image.svg.person.svg(width: 24),
                     ),
                   ),
                   sizedBoxH16,
@@ -104,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hint: 'شماره تلفن',
                     prefixIcon: Padding(
                       padding: paddingSuffixIcon,
-                      child: Assets.image.svg.phone.svg(),
+                      child: Assets.image.svg.phone.svg(width: 24),
                     ),
                     maxLength: 11,
                   ),
@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     isPassword: true,
                     prefixIcon: Padding(
                       padding: paddingSuffixIcon,
-                      child: Assets.image.svg.password.svg(),
+                      child: Assets.image.svg.password.svg(width: 24),
                     ),
                     suffixIcon: InkWell(
                       customBorder: const CircleBorder(),

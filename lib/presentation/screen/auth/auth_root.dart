@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 
@@ -13,6 +14,17 @@ class AuthRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final MediaQueryData mediaQuery = MediaQuery.of(context);
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: themeData.colorScheme.surfaceVariant,
+      statusBarIconBrightness: Brightness.dark,
+    ));
+
     return Scaffold(
       backgroundColor: themeData.colorScheme.background,
       body: SafeArea(

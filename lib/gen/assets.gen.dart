@@ -21,6 +21,10 @@ class $AssetsImageGen {
 class $AssetsImagePngGen {
   const $AssetsImagePngGen();
 
+  /// File path: assets/image/png/avatar.png
+  AssetGenImage get avatar =>
+      const AssetGenImage('assets/image/png/avatar.png');
+
   /// File path: assets/image/png/banner.png
   AssetGenImage get banner =>
       const AssetGenImage('assets/image/png/banner.png');
@@ -29,18 +33,54 @@ class $AssetsImagePngGen {
 class $AssetsImageSvgGen {
   const $AssetsImageSvgGen();
 
+  /// File path: assets/image/svg/all_ticket.svg
+  SvgGenImage get allTicket =>
+      const SvgGenImage('assets/image/svg/all_ticket.svg');
+
+  /// File path: assets/image/svg/arrow.svg
+  SvgGenImage get arrow => const SvgGenImage('assets/image/svg/arrow.svg');
+
+  /// File path: assets/image/svg/check.svg
+  SvgGenImage get check => const SvgGenImage('assets/image/svg/check.svg');
+
+  /// File path: assets/image/svg/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/image/svg/delete.svg');
+
+  /// File path: assets/image/svg/exit.svg
+  SvgGenImage get exit => const SvgGenImage('assets/image/svg/exit.svg');
+
+  /// File path: assets/image/svg/file.svg
+  SvgGenImage get file => const SvgGenImage('assets/image/svg/file.svg');
+
+  /// File path: assets/image/svg/lock.svg
+  SvgGenImage get lock => const SvgGenImage('assets/image/svg/lock.svg');
+
   /// File path: assets/image/svg/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/image/svg/logo.svg');
+
+  /// File path: assets/image/svg/my_ticket.svg
+  SvgGenImage get myTicket =>
+      const SvgGenImage('assets/image/svg/my_ticket.svg');
 
   /// File path: assets/image/svg/password.svg
   SvgGenImage get password =>
       const SvgGenImage('assets/image/svg/password.svg');
+
+  /// File path: assets/image/svg/password_item.svg
+  SvgGenImage get passwordItem =>
+      const SvgGenImage('assets/image/svg/password_item.svg');
 
   /// File path: assets/image/svg/person.svg
   SvgGenImage get person => const SvgGenImage('assets/image/svg/person.svg');
 
   /// File path: assets/image/svg/phone.svg
   SvgGenImage get phone => const SvgGenImage('assets/image/svg/phone.svg');
+
+  /// File path: assets/image/svg/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/image/svg/search.svg');
+
+  /// File path: assets/image/svg/send.svg
+  SvgGenImage get send => const SvgGenImage('assets/image/svg/send.svg');
 }
 
 class Assets {

@@ -14,7 +14,7 @@ class CustomTextField extends StatelessWidget {
   }) : super(key: key);
 
   final bool obscure = false;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final int? maxLength;
   final TextInputType keyboardType;
   final String hint;
@@ -26,7 +26,9 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return TextField(
-      style: themeData.textTheme.bodyText2,
+      style: themeData.textTheme.bodyText2!.copyWith(
+        fontWeight: FontWeight.w500,
+      ),
       controller: controller,
       maxLines: 1,
       maxLength: maxLength,
@@ -48,8 +50,10 @@ class CustomTextField extends StatelessWidget {
         label: Text(
           hint,
           style: themeData.textTheme.bodyText2!.apply(
-            color: themeData.textTheme.bodyText2!.color!.withOpacity(0.7),
-          ),
+              color: themeData.colorScheme.onSurface.withOpacity(
+                0.7,
+              ),
+              fontSizeFactor: 0.9),
         ),
         prefixIconConstraints: const BoxConstraints(
           minWidth: iconSize,
