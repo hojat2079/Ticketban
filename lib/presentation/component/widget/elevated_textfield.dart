@@ -12,28 +12,34 @@ class ElevatedTextField extends StatelessWidget {
   final bool isPassword;
   final int maxLines;
   final double? height;
+  final double topPadding;
+  final double bottomPadding;
+  final BorderRadius borderRadius;
 
-  const ElevatedTextField(
-      {Key? key,
-      this.controller,
-      this.maxLength,
-      required this.keyboardType,
-      required this.hint,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.maxLines = 1,
-      required this.isPassword,
-      this.height})
-      : super(key: key);
+  const ElevatedTextField({
+    Key? key,
+    this.controller,
+    this.maxLength,
+    required this.keyboardType,
+    required this.hint,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.maxLines = 1,
+    this.isPassword = false,
+    this.height,
+    this.topPadding = 6,
+    this.bottomPadding = 6,
+    this.borderRadius = circular18,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Container(
       height: height,
-      padding: const EdgeInsets.only(
-        top: 6,
-        bottom: 6,
+      padding: EdgeInsets.only(
+        top: topPadding,
+        bottom: bottomPadding,
         right: 16,
         left: 16,
       ),
@@ -51,7 +57,7 @@ class ElevatedTextField extends StatelessWidget {
             blurRadius: 30,
           )
         ],
-        borderRadius: circular18,
+        borderRadius: borderRadius,
       ),
       child: TextField(
         style: themeData.textTheme.bodyText2!.copyWith(

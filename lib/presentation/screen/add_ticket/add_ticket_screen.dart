@@ -36,7 +36,7 @@ class AddNewTicketScreen extends StatelessWidget {
               children: [
                 sizedBoxH24,
                 const HomeAppBar(),
-                sizedBoxH36,
+                sizedBoxH48,
                 _largeText(themeData, 'ارسال تیکت جدید'),
                 sizedBoxH32,
                 _descriptionText(themeData, 'نوع درخواست:'),

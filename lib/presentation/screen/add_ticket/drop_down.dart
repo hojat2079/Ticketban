@@ -6,13 +6,13 @@ import 'package:ticketban_mobile/presentation/component/dimension.dart';
 
 class DropDownTicketType extends StatelessWidget {
   // List of items in our dropdown menu
-  final List<String> items = [
+  final List<String> _items = [
     'تعیین نوع درخواست...',
     'مالی',
     'عمومی',
     'اداری',
   ];
-  final Map<String, Color> colorItems = {
+  final Map<String, Color> _colorItems = {
     'تعیین نوع درخواست...': LightColorPalette.blackTextColor,
     'مالی': LightColorPalette.yellowDropDown,
     'عمومی': LightColorPalette.greenDropDown,
@@ -66,18 +66,18 @@ class DropDownTicketType extends StatelessWidget {
             right: 8,
             left: 16,
           ),
-          hintText: items[0],
+          hintText: _items[0],
           hintStyle: themeData.textTheme.bodyText2!.apply(
             color: themeData.colorScheme.onSurface.withOpacity(0.7),
           ),
         ),
-        items: items
+        items: _items
             .map(
               (String item) => DropdownMenuItem(
                 alignment: Alignment.centerRight,
-                enabled: items.first == item ? false : true,
+                enabled: _items.first == item ? false : true,
                 value: item,
-                child: items.first == item
+                child: _items.first == item
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -116,7 +116,7 @@ class DropDownTicketType extends StatelessWidget {
                           item,
                           style: themeData.textTheme.subtitle2!.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: colorItems[item],
+                            color: _colorItems[item],
                             fontSize: 16,
                           ),
                         ),

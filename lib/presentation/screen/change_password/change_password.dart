@@ -37,7 +37,7 @@ class ChangePasswordScreen extends StatelessWidget {
               children: [
                 sizedBoxH24,
                 const HomeAppBar(),
-                sizedBoxH36,
+                sizedBoxH48,
                 _largeText(themeData, 'تغییر کلمه عبور'),
                 sizedBoxH32,
                 _descriptionText(themeData, 'کلمه عبور فعلی را وارد کنید:'),

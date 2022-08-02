@@ -11,9 +11,11 @@ class LightColorPalette {
   static const purple = Color(0xff6542D0);
   static const greenBlue = Color(0xff58C7D5);
   static const grey = Color(0xff8F8F8F);
+  static const grayContainer = Color(0xffF2F2F2);
   static const background = Color(0xffE7E7F2);
   static const red = Color(0xffFF4F4F);
   static const darkRed = Color(0xffE52323);
+  static const darkerRed = Color(0xffC90707);
   static const green = Color(0xff00B7A1);
   static const yellowDropDown = Color(0xffFFC24B);
   static const greenDropDown = Color(0xff71CB7E);
@@ -74,5 +76,12 @@ class LightColorPalette {
     ],
     begin: Alignment.centerRight,
     end: Alignment.centerLeft,
+  );
+
+  static const defaultToggleButton = LinearGradient(
+    colors: [
+      Color(0xff54E8D6),
+      Color(0xff6914CD),
+    ],
   );
 }

@@ -16,16 +16,24 @@ const EdgeInsets appbarAuthPadding = EdgeInsets.symmetric(
 );
 const EdgeInsets padding24 = EdgeInsets.all(24);
 const EdgeInsets padding12 = EdgeInsets.all(12);
+const EdgeInsets padding10 = EdgeInsets.all(10);
+const EdgeInsets padding18 = EdgeInsets.all(18);
 const EdgeInsets padding24H = EdgeInsets.symmetric(horizontal: 24);
 const EdgeInsets padding8H = EdgeInsets.symmetric(horizontal: 8);
+const EdgeInsets padding9H = EdgeInsets.symmetric(horizontal: 9);
+const EdgeInsets padding6H = EdgeInsets.symmetric(horizontal: 6);
 const EdgeInsets padding32H = EdgeInsets.symmetric(horizontal: 32);
 const EdgeInsets padding36H = EdgeInsets.symmetric(horizontal: 36);
 const EdgeInsets padding36 = EdgeInsets.symmetric(horizontal: 36, vertical: 36);
 const EdgeInsets padding0 = EdgeInsets.zero;
 const EdgeInsets paddingSuffixIcon = EdgeInsets.only(left: 8, right: 12);
 const EdgeInsets padding4R = EdgeInsets.only(right: 4);
+const EdgeInsets padding3V = EdgeInsets.symmetric(vertical: 3);
+const EdgeInsets padding8L = EdgeInsets.only(left: 8);
+const EdgeInsets padding1 = EdgeInsets.all(1);
 
 //sizedBox
+const sizedBoxW2 = SizedBox(width: 2);
 const sizedBoxW4 = SizedBox(width: 4);
 const sizedBoxW8 = SizedBox(width: 8);
 const sizedBoxW12 = SizedBox(width: 12);

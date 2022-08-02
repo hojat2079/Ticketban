@@ -16,6 +16,7 @@ class AppThemeConfig {
   final Color primary;
   final Color surface;
   final Color surfaceV;
+  final Color surfaceTint;
   final Color onPrimary;
   final Color background;
   final Color secondary;
@@ -24,6 +25,7 @@ class AppThemeConfig {
   final Color divider;
   final Color icon;
   final Color primaryV;
+  final Color error;
   final Color inverseSurface;
 
   AppThemeConfig.light()
@@ -39,7 +41,9 @@ class AppThemeConfig {
         divider = LightColorPalette.grey,
         primaryV = LightColorPalette.darkBlue,
         icon = LightColorPalette.white,
-        inverseSurface = LightColorPalette.whiteShadow;
+        surfaceTint = LightColorPalette.grayContainer,
+        inverseSurface = LightColorPalette.whiteShadow,
+        error = LightColorPalette.darkerRed;
 
   ThemeData getTheme() {
     return ThemeData(
@@ -54,6 +58,8 @@ class AppThemeConfig {
           inverseSurface: inverseSurface,
           onSurface: onSurface,
           surfaceVariant: surfaceV,
+          surfaceTint: surfaceTint,
+          error: error,
         ),
         textTheme: TextTheme(
             bodyText2: defaultTextStyle,

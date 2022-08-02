@@ -43,6 +43,9 @@ class $AssetsImageSvgGen {
   /// File path: assets/image/svg/check.svg
   SvgGenImage get check => const SvgGenImage('assets/image/svg/check.svg');
 
+  /// File path: assets/image/svg/delete.svg
+  SvgGenImage get delete => const SvgGenImage('assets/image/svg/delete.svg');
+
   /// File path: assets/image/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/image/svg/exit.svg');
 
@@ -72,6 +75,9 @@ class $AssetsImageSvgGen {
 
   /// File path: assets/image/svg/phone.svg
   SvgGenImage get phone => const SvgGenImage('assets/image/svg/phone.svg');
+
+  /// File path: assets/image/svg/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/image/svg/search.svg');
 
   /// File path: assets/image/svg/send.svg
   SvgGenImage get send => const SvgGenImage('assets/image/svg/send.svg');
