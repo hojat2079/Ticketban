@@ -60,7 +60,7 @@ class UnansweredTicketItem extends StatelessWidget {
     );
   }
 
-  Text _dateText(ThemeData themeData) {
+  Widget _dateText(ThemeData themeData) {
     return Text(
       ticketDate.toFaNumber(),
       style: themeData.textTheme.caption!.copyWith(
@@ -69,7 +69,7 @@ class UnansweredTicketItem extends StatelessWidget {
     );
   }
 
-  Material _deleteButton(ThemeData themeData) {
+  Widget _deleteButton(ThemeData themeData) {
     return Material(
       color: Colors.transparent,
       child: InkWell(

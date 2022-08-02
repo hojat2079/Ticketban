@@ -4,6 +4,7 @@ import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/elevated_textfield.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
+import 'package:ticketban_mobile/presentation/screen/list_ticket/answered_ticket_item.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/unanswared_ticket_item.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/custom_toggle_group.dart';
 
@@ -64,12 +65,14 @@ class ListTicketScreen extends StatelessWidget {
               child: ListView.builder(
                 padding: const EdgeInsets.only(bottom: 56),
                 itemBuilder: (context, index) {
-                  return const UnansweredTicketItem(
+                  return const AnsweredTicketItem(
+                    adminMessage:
+                        'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و...',
                     ticketTitle: 'بررسی مجدد درخواست',
                     ticketType: 'مالی',
                     ticketDesc:
                         'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و...',
-                    ticketDate: '۱۲/۰۳/۱۴۰۰                 ۱۳:۴۳',
+                    ticketDate: '۱۳:۴۳                 ۱۲/۰۳/۱۴۰۰',
                     ticketTypeColor: Color(0xffFFC24B),
                   );
                 },

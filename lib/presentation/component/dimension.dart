@@ -7,6 +7,7 @@ const BorderRadius circular16 = BorderRadius.all(Radius.circular(16));
 const BorderRadius circular18 = BorderRadius.all(Radius.circular(18));
 const BorderRadius circular10 = BorderRadius.all(Radius.circular(10));
 const BorderRadius circular14 = BorderRadius.all(Radius.circular(14));
+const BorderRadius circular12 = BorderRadius.all(Radius.circular(12));
 const BorderRadius circular21 = BorderRadius.all(Radius.circular(21));
 
 //padding
@@ -28,6 +29,7 @@ const EdgeInsets padding36 = EdgeInsets.symmetric(horizontal: 36, vertical: 36);
 const EdgeInsets padding0 = EdgeInsets.zero;
 const EdgeInsets paddingSuffixIcon = EdgeInsets.only(left: 8, right: 12);
 const EdgeInsets padding4R = EdgeInsets.only(right: 4);
+const EdgeInsets padding4L = EdgeInsets.only(left: 4);
 const EdgeInsets padding3V = EdgeInsets.symmetric(vertical: 3);
 const EdgeInsets padding8L = EdgeInsets.only(left: 8);
 const EdgeInsets padding1 = EdgeInsets.all(1);
@@ -38,6 +40,7 @@ const sizedBoxW4 = SizedBox(width: 4);
 const sizedBoxW8 = SizedBox(width: 8);
 const sizedBoxW12 = SizedBox(width: 12);
 const sizedBoxH12 = SizedBox(height: 12);
+const sizedBoxH14 = SizedBox(height: 14);
 const sizedBoxH16 = SizedBox(height: 16);
 const sizedBoxW16 = SizedBox(width: 16);
 const sizedBoxH24 = SizedBox(height: 24);
