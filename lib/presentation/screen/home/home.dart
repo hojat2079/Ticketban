@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
+import 'package:ticketban_mobile/presentation/screen/add_ticket/add_ticket_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/avatar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/menu_item.dart';
+import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String route = '/home';
@@ -59,13 +61,17 @@ class HomeScreen extends StatelessWidget {
                     item1,
                     style: themeData.textTheme.subtitle1,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, ListTicketScreen.route);
+                  },
                 ),
                 sizedBoxH20,
                 CustomMenuItem(
                   icon: Assets.image.svg.allTicket.svg(),
                   text: Text(item2, style: themeData.textTheme.subtitle1),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AddNewTicketScreen.route);
+                  },
                 ),
                 sizedBoxH20,
                 CustomMenuItem(
@@ -81,9 +87,10 @@ class HomeScreen extends StatelessWidget {
                   text: Text(item4, style: themeData.textTheme.subtitle1),
                   onTap: () async {
                     await showCustomDialog(
-                        context: context,
-                        title: 'آیا از خروج خود اطمینان دارید؟',
-                        themeData: themeData);
+                      context: context,
+                      title: 'آیا از خروج خود اطمینان دارید؟',
+                      themeData: themeData,
+                    );
                   },
                 ),
               ],

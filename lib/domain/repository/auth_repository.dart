@@ -10,7 +10,7 @@ abstract class AuthRepository {
 
   Future<void> verifyOtp(String otp);
 
-  Future<bool> saveTokenToDb(TokenContainer tokenHolder);
+  Future<bool> saveTokenToDb(String token, String refreshToken);
 
   Future<void> loadTokenFromDb();
 }

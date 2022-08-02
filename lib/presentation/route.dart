@@ -10,6 +10,7 @@ import 'package:ticketban_mobile/presentation/screen/auth/otp_container.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/register_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home.dart';
+import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
 
 class AppRoute {
   final getIt = GetIt.instance;
@@ -106,6 +107,15 @@ class AppRoute {
             child: AddNewTicketScreen(),
           );
         });
+      case ListTicketScreen.route:
+        return MaterialPageRoute(
+          builder: (context) {
+            return const Directionality(
+              textDirection: TextDirection.rtl,
+              child: ListTicketScreen(),
+            );
+          },
+        );
       default:
         throw Exception('root is not valid');
     }

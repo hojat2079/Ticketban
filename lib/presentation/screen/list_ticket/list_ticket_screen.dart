@@ -5,10 +5,11 @@ import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/elevated_textfield.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/answered_ticket_item.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/unanswared_ticket_item.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/custom_toggle_group.dart';
 
 class ListTicketScreen extends StatelessWidget {
+  static const String route = '/list';
+
   const ListTicketScreen({Key? key}) : super(key: key);
 
   @override

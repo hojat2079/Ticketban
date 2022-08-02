@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ticketban_mobile/data/local/app_prefernces.dart';
 import 'package:ticketban_mobile/data/remote/api_service.dart';
 import 'package:ticketban_mobile/data/remote/dio_api_service.dart';
 import 'package:ticketban_mobile/data/repository/auth_repository_impl.dart';
@@ -21,11 +23,19 @@ Future<void> initModule() async {
   instance.registerLazySingleton<ApiService>(() => apiService);
 
   //shared preferences
-  //todo
+  final SharedPreferences sharedPreferences =
+      await SharedPreferences.getInstance();
+  instance.registerLazySingleton<SharedPreferences>(
+    () => sharedPreferences,
+  );
+  instance.registerLazySingleton<AppPreferences>(
+      () => AppPreferences(instance<SharedPreferences>()));
 
   //repositories
   final AuthRepository authRepository = AuthRepositoryImpl(
     instance<ApiService>(),
+    instance<AppPreferences>(),
   );
+  await authRepository.loadTokenFromDb();
   instance.registerLazySingleton(() => authRepository);
 }
