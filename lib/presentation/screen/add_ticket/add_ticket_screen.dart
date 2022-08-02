@@ -37,28 +37,13 @@ class AddNewTicketScreen extends StatelessWidget {
                 sizedBoxH24,
                 const HomeAppBar(),
                 sizedBoxH36,
-                Text(
-                  'ارسال تیکت جدید',
-                  style: themeData.textTheme.headline2,
-                ),
+                _largeText(themeData, 'ارسال تیکت جدید'),
                 sizedBoxH32,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'نوع درخواست:',
-                    style: themeData.textTheme.subtitle2,
-                  ),
-                ),
+                _descriptionText(themeData, 'نوع درخواست:'),
                 sizedBoxH12,
                 DropDownTicketType(),
                 sizedBoxH24,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'موضوع درخواست:',
-                    style: themeData.textTheme.subtitle2,
-                  ),
-                ),
+                _descriptionText(themeData, 'موضوع درخواست:'),
                 sizedBoxH12,
                 const ElevatedTextField(
                   keyboardType: TextInputType.text,
@@ -66,13 +51,7 @@ class AddNewTicketScreen extends StatelessWidget {
                   isPassword: false,
                 ),
                 sizedBoxH24,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'متن درخواست:',
-                    style: themeData.textTheme.subtitle2,
-                  ),
-                ),
+                _descriptionText(themeData, 'متن درخواست:'),
                 sizedBoxH12,
                 const ElevatedTextField(
                   keyboardType: TextInputType.text,
@@ -82,13 +61,7 @@ class AddNewTicketScreen extends StatelessWidget {
                   height: 150,
                 ),
                 sizedBoxH24,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'درج فایل',
-                    style: themeData.textTheme.subtitle2,
-                  ),
-                ),
+                _descriptionText(themeData, 'درج فایل'),
                 sizedBoxH12,
                 FileComponent(image: Assets.image.svg.file.svg()),
                 sizedBoxH48,
@@ -109,6 +82,23 @@ class AddNewTicketScreen extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _largeText(ThemeData themeData, String text) {
+    return Text(
+      text,
+      style: themeData.textTheme.headline2,
+    );
+  }
+
+  Widget _descriptionText(ThemeData themeData, String text) {
+    return Padding(
+      padding: padding4R,
+      child: Text(
+        text,
+        style: themeData.textTheme.subtitle2,
       ),
     );
   }

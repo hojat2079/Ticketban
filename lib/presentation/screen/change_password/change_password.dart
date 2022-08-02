@@ -20,6 +20,12 @@ class ChangePasswordScreen extends StatelessWidget {
       statusBarColor: themeData.colorScheme.surface,
       statusBarIconBrightness: Brightness.dark,
     ));
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+
     return Scaffold(
       backgroundColor: themeData.colorScheme.surfaceVariant,
       body: SafeArea(
@@ -32,18 +38,9 @@ class ChangePasswordScreen extends StatelessWidget {
                 sizedBoxH24,
                 const HomeAppBar(),
                 sizedBoxH36,
-                Text(
-                  'تغییر کلمه عبور',
-                  style: themeData.textTheme.headline2,
-                ),
+                _largeText(themeData, 'تغییر کلمه عبور'),
                 sizedBoxH32,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'کلمه عبور فعلی را وارد کنید:',
-                    style: themeData.textTheme.subtitle2,
-                  ),
-                ),
+                _descriptionText(themeData, 'کلمه عبور فعلی را وارد کنید:'),
                 sizedBoxH12,
                 CustomTextField(
                   hint: 'کلمه عبور فعلی:',
@@ -55,13 +52,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                 ),
                 sizedBoxH24,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'کلمه عبور جدید را وارد کنید:',
-                    style: themeData.textTheme.subtitle2,
-                  ),
-                ),
+                _descriptionText(themeData, 'کلمه عبور جدید را وارد کنید:'),
                 sizedBoxH12,
                 CustomTextField(
                   hint: 'کلمه عبور جدید:',
@@ -72,12 +63,9 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                 ),
                 sizedBoxH24,
-                Padding(
-                  padding: padding4R,
-                  child: Text(
-                    'کلمه عبور جدید را مجددا وارد کنید:',
-                    style: themeData.textTheme.subtitle2,
-                  ),
+                _descriptionText(
+                  themeData,
+                  'کلمه عبور جدید را مجددا وارد کنید:',
                 ),
                 sizedBoxH12,
                 CustomTextField(
@@ -104,6 +92,23 @@ class ChangePasswordScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _descriptionText(ThemeData themeData, String text) {
+    return Padding(
+      padding: padding4R,
+      child: Text(
+        text,
+        style: themeData.textTheme.subtitle2,
+      ),
+    );
+  }
+
+  Widget _largeText(ThemeData themeData, String text) {
+    return Text(
+      text,
+      style: themeData.textTheme.headline2,
     );
   }
 }
