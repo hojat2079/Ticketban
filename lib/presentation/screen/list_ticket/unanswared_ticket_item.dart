@@ -3,14 +3,14 @@ import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/util/extension.dart';
 
-class AnsweredTicketItem extends StatelessWidget {
+class UnansweredTicketItem extends StatelessWidget {
   final String ticketTitle;
   final String ticketType;
   final Color ticketTypeColor;
   final String ticketDesc;
   final String ticketDate;
 
-  const AnsweredTicketItem(
+  const UnansweredTicketItem(
       {Key? key,
       required this.ticketTitle,
       required this.ticketType,

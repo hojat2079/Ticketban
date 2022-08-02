@@ -4,7 +4,7 @@ import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/elevated_textfield.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/answared_ticket_item.dart';
+import 'package:ticketban_mobile/presentation/screen/list_ticket/unanswared_ticket_item.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/custom_toggle_group.dart';
 
 class ListTicketScreen extends StatelessWidget {
@@ -64,7 +64,7 @@ class ListTicketScreen extends StatelessWidget {
               child: ListView.builder(
                 padding: const EdgeInsets.only(bottom: 56),
                 itemBuilder: (context, index) {
-                  return const AnsweredTicketItem(
+                  return const UnansweredTicketItem(
                     ticketTitle: 'بررسی مجدد درخواست',
                     ticketType: 'مالی',
                     ticketDesc:
