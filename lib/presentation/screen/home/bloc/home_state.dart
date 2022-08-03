@@ -17,3 +17,13 @@ class HomeSuccess extends HomeState {
   @override
   List<Object> get props => [];
 }
+
+class HomeExitSuccess extends HomeState {
+  @override
+  List<Object?> get props => [];
+}
+
+class HomeBackExit extends HomeState {
+  @override
+  List<Object?> get props => [];
+}

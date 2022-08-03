@@ -59,4 +59,10 @@ class AuthRepositoryImpl implements AuthRepository {
     }
     return result;
   }
+
+  @override
+  Future<void> clearData() async {
+    TokenContainer.instance().clear();
+    await appPreferences.clear();
+  }
 }

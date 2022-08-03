@@ -1,7 +1,5 @@
-import 'package:ticketban_mobile/data/remote/dto/auth_response.dart';
 import 'package:ticketban_mobile/data/remote/dto/login_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/register_request.dart';
-import 'package:ticketban_mobile/domain/model/token_container.dart';
 
 abstract class AuthRepository {
   Future<void> register(RegisterRequest registerRequest);
@@ -13,4 +11,6 @@ abstract class AuthRepository {
   Future<bool> saveTokenToDb(String token, String refreshToken);
 
   Future<void> loadTokenFromDb();
+
+  Future<void> clearData();
 }

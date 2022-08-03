@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:ticketban_mobile/data/repository/ticket_user_repository_impl.dart';
+import 'package:ticketban_mobile/domain/repository/auth_repository.dart';
 import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/screen/add_ticket/add_ticket_screen.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/avatar.dart';
@@ -18,7 +19,7 @@ import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_scr
 
 import 'bloc/home_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String route = '/home';
   static const String item1 = 'تیکت های شما';
   static const String item2 = 'ارسال تیکت جدید';
@@ -28,9 +29,22 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final getIt = GetIt.instance;
+  HomeBloc? _bloc;
+
+  @override
+  void dispose() {
+    _bloc?.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    final getIt = GetIt.instance;
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.surfaceVariant,
@@ -45,11 +59,16 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: themeData.colorScheme.surfaceVariant,
       body: BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc(
-          getIt<TicketUserRepository>(),
-        )..add(
+        create: (context) {
+          _bloc = HomeBloc(
+            getIt<TicketUserRepository>(),
+            getIt<AuthRepository>(),
+          );
+          _bloc!.add(
             HomeStarted(),
-          ),
+          );
+          return _bloc!;
+        },
         child: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -75,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                   CustomMenuItem(
                     icon: Assets.image.svg.myTicket.svg(),
                     text: Text(
-                      item1,
+                      HomeScreen.item1,
                       style: themeData.textTheme.subtitle1,
                     ),
                     onTap: () {
@@ -85,7 +104,8 @@ class HomeScreen extends StatelessWidget {
                   sizedBoxH20,
                   CustomMenuItem(
                     icon: Assets.image.svg.allTicket.svg(),
-                    text: Text(item2, style: themeData.textTheme.subtitle1),
+                    text: Text(HomeScreen.item2,
+                        style: themeData.textTheme.subtitle1),
                     onTap: () {
                       Navigator.pushNamed(context, AddNewTicketScreen.route);
                     },
@@ -93,7 +113,8 @@ class HomeScreen extends StatelessWidget {
                   sizedBoxH20,
                   CustomMenuItem(
                     icon: Assets.image.svg.passwordItem.svg(),
-                    text: Text(item3, style: themeData.textTheme.subtitle1),
+                    text: Text(HomeScreen.item3,
+                        style: themeData.textTheme.subtitle1),
                     onTap: () {
                       Navigator.pushNamed(context, ChangePasswordScreen.route);
                     },
@@ -101,7 +122,8 @@ class HomeScreen extends StatelessWidget {
                   sizedBoxH20,
                   CustomMenuItem(
                     icon: Assets.image.svg.exit.svg(),
-                    text: Text(item4, style: themeData.textTheme.subtitle1),
+                    text: Text(HomeScreen.item4,
+                        style: themeData.textTheme.subtitle1),
                     onTap: () async {
                       await showCustomDialog(
                         context: context,
@@ -128,65 +150,85 @@ class HomeScreen extends StatelessWidget {
       context: context,
       barrierColor: null,
       builder: (context) {
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: AlertDialog(
-              shape: const RoundedRectangleBorder(
-                borderRadius: circular28,
-              ),
-              alignment: Alignment.center,
-              actionsAlignment: MainAxisAlignment.center,
-              titlePadding: const EdgeInsets.only(
-                top: 24,
-                bottom: 0,
-                right: 16,
-                left: 16,
-              ),
-              actionsPadding: const EdgeInsets.only(
-                top: 20,
-                bottom: 8,
-                right: 16,
-                left: 16,
-              ),
-              title: Center(
-                child: Text(
-                  title,
-                  style: themeData.textTheme.headline6!.apply(
-                    color: const Color(0xff3A3A3A),
+        return BlocProvider.value(
+          value: _bloc!,
+          child: BlocListener<HomeBloc, HomeState>(
+            listenWhen: (p, c) {
+              return c is HomeExitSuccess || c is HomeBackExit;
+            },
+            listener: (context, state) {
+              if (state is HomeBackExit) {
+                Navigator.pop(context);
+              } else if (state is HomeExitSuccess) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, LoginScreen.route, (route) => false);
+              }
+            },
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                child: AlertDialog(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: circular28,
                   ),
-                ),
-              ),
-              actions: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    primary: LightColorPalette.green,
-                    onPrimary: Colors.white,
-                    textStyle: themeData.textTheme.headline6,
-                    minimumSize: const Size(95, 35),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: circular10,
+                  alignment: Alignment.center,
+                  actionsAlignment: MainAxisAlignment.center,
+                  titlePadding: const EdgeInsets.only(
+                    top: 24,
+                    bottom: 0,
+                    right: 16,
+                    left: 16,
+                  ),
+                  actionsPadding: const EdgeInsets.only(
+                    top: 20,
+                    bottom: 8,
+                    right: 16,
+                    left: 16,
+                  ),
+                  title: Center(
+                    child: Text(
+                      title,
+                      style: themeData.textTheme.headline6!.apply(
+                        color: const Color(0xff3A3A3A),
+                      ),
                     ),
                   ),
-                  child: const Text('بله'),
-                ),
-                const SizedBox.shrink(),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    primary: LightColorPalette.red,
-                    onPrimary: Colors.white,
-                    textStyle: themeData.textTheme.headline6,
-                    minimumSize: const Size(95, 35),
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: circular10,
+                  actions: [
+                    ElevatedButton(
+                      onPressed: () {
+                        _bloc?.add(const HomeExitButtonClicked(true));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: LightColorPalette.green,
+                        onPrimary: Colors.white,
+                        textStyle: themeData.textTheme.headline6,
+                        minimumSize: const Size(95, 35),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: circular10,
+                        ),
+                      ),
+                      child: const Text('بله'),
                     ),
-                  ),
-                  child: const Text('خیر'),
+                    const SizedBox.shrink(),
+                    ElevatedButton(
+                      onPressed: () {
+                        _bloc?.add(const HomeExitButtonClicked(false));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: LightColorPalette.red,
+                        onPrimary: Colors.white,
+                        textStyle: themeData.textTheme.headline6,
+                        minimumSize: const Size(95, 35),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: circular10,
+                        ),
+                      ),
+                      child: const Text('خیر'),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         );
