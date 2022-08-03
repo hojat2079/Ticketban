@@ -7,5 +7,11 @@ class Constant {
   static const String registerUrl = 'auth/register';
   static const String verifyOtpUrl = 'auth/verify-otp';
 
-//ticket
+  //ticket
+  static const String createTicket = 'user/create-ticket';
+  static const String getAllTicketUser = 'user/get-user-tickets';
+  static const String getAllTicketUserFiltered = 'user/filter-user-tickets';
+  static const String deleteTicket = 'user/delete-ticket';
+
+  Constant._();
 }
