@@ -21,6 +21,10 @@ extension NumberIntFormat on int {
     String sec = (this % 60).toString().padLeft(2, '0');
     return '$min:$sec'.toFaNumber();
   }
+
+  String toFormatStandardTimeInApp() {
+    return '${toFormatMinSecTime().toFaNumber()}    باقی مانده است';
+  }
 }
 
 extension ShowView on BuildContext {

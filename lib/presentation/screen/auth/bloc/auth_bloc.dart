@@ -11,6 +11,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
+  int _currentTime = 120;
 
   AuthBloc({required this.authRepository}) : super(const AuthLogin()) {
     on<AuthEvent>((event, emit) async {
@@ -30,6 +31,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         await emitSuccessStateWithAuthOtpClicked(emit, event.otp);
       } else if (event is AuthForgetPasswordClicked) {
         emitForgetPasswordStateWithForgetButtonClicked(emit);
+      } else if (event is AuthAfterOneSecond) {
+        emitDecreaseTimerWithAfterOneSecond(emit);
       }
     });
   }
@@ -91,10 +94,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     try {
       emit(const AuthLoading());
-      await authRepository.verifyOtp(otp);
-      emit(const AuthSuccess());
+      final result = await authRepository.verifyOtp(otp);
+      if (result) {
+        emit(const AuthSuccess());
+      }
     } catch (ex) {
       emit(AuthErrorState(ex is CustomError ? ex : CustomError()));
+    }
+  }
+
+  void emitDecreaseTimerWithAfterOneSecond(Emitter<AuthState> emit) {
+    if (_currentTime == 0) {
+      emit(const AuthCancelTimer());
+    } else {
+      _currentTime--;
+      emit(AuthDecreaseTimer(_currentTime));
     }
   }
 }

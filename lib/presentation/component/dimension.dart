@@ -35,6 +35,7 @@ const EdgeInsets padding8L = EdgeInsets.only(left: 8);
 const EdgeInsets padding1 = EdgeInsets.all(1);
 
 //sizedBox
+const sizedBox0 = SizedBox.shrink();
 const sizedBoxW2 = SizedBox(width: 2);
 const sizedBoxW4 = SizedBox(width: 4);
 const sizedBoxW8 = SizedBox(width: 8);

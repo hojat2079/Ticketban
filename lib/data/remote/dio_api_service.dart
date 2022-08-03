@@ -47,14 +47,14 @@ class DioApiService with HttpResponseValidator implements ApiService {
   }
 
   @override
-  Future<void> verifyOtp(String otp, String verificationId) async {
+  Future<bool> verifyOtp(String otp, String verificationId) async {
     final response = await dio.post(
-      Constant.loginUrl,
+      Constant.verifyOtpUrl,
       data: {
         'otp': otp,
         'verificationId': verificationId,
       },
     );
-    validateResponse(response);
+    return validateResponse(response);
   }
 }

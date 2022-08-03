@@ -8,6 +8,7 @@ import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_scr
 import 'package:ticketban_mobile/presentation/theme.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await initModule();
   runApp(const MyApp());
 }
@@ -29,11 +30,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Ticketban',
       theme: AppThemeConfig.light().getTheme(),
-      // onGenerateRoute: _appRoute.onGenerateRoute,
-      home: const Directionality(
-        textDirection: TextDirection.rtl,
-        child: ListTicketScreen(),
-      ),
+      onGenerateRoute: _appRoute.onGenerateRoute,
     );
   }
 

@@ -6,6 +6,7 @@ import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_text.dart';
+import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/auth_root.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/bloc/auth_bloc.dart';
@@ -197,12 +198,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget showLoading(Color color) {
-    return CircularProgressIndicator(
-      color: color,
     );
   }
 }

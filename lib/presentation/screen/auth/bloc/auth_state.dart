@@ -36,8 +36,10 @@ class AuthForgetPasswordOtp extends AuthState {
 }
 
 class AuthOtp extends AuthState {
-  static const title = 'اعتبارسنجی';
-  static const desc = 'کد ارسال شده به تلفن خود را جهت اعتبارسنجی وارد کنید';
+  static const String title = 'اعتبارسنجی';
+  static const String desc =
+      'کد ارسال شده به تلفن خود را جهت اعتبارسنجی وارد کنید';
+  static const int startTimer = 120;
 
   const AuthOtp();
 
@@ -63,6 +65,22 @@ class AuthErrorState extends AuthState {
 
 class AuthLoading extends AuthState {
   const AuthLoading();
+
+  @override
+  List<Object> get props => [];
+}
+
+class AuthDecreaseTimer extends AuthState {
+  final int timer;
+
+  const AuthDecreaseTimer(this.timer);
+
+  @override
+  List<Object> get props => [timer];
+}
+
+class AuthCancelTimer extends AuthState {
+  const AuthCancelTimer();
 
   @override
   List<Object> get props => [];

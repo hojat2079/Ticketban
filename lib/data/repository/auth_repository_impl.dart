@@ -44,10 +44,15 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<void> verifyOtp(String otp) {
-    return apiService.verifyOtp(
+  Future<bool> verifyOtp(String otp) async {
+    final bool result = await apiService.verifyOtp(
       otp,
       token.verificationId!,
     );
+    if (!result) {
+      appPreferences.clear();
+      TokenContainer.instance().clear();
+    }
+    return result;
   }
 }

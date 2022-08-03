@@ -5,11 +5,11 @@ import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/custom_textfield.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
+import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/auth_root.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/bloc/auth_bloc.dart';
-import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
-import 'package:ticketban_mobile/presentation/screen/auth/otp_container.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/otp_screen.dart';
 import 'package:ticketban_mobile/util/extension.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -158,11 +158,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ));
-  }
-
-  Widget showLoading(Color color) {
-    return CircularProgressIndicator(
-      color: color,
-    );
   }
 }

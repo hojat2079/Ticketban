@@ -14,6 +14,11 @@ class TokenContainer extends Equatable {
     return _instance!;
   }
 
+  void clear() {
+    accessToken = '';
+    refreshToken = '';
+  }
+
   @override
   List<Object?> get props => [accessToken, refreshToken];
 }

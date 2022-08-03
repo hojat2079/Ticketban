@@ -7,7 +7,7 @@ abstract class ApiService {
 
   Future<AuthResponse> login(LoginRequest loginRequest);
 
-  Future<void> verifyOtp(String otp, String verificationId);
+  Future<bool> verifyOtp(String otp, String verificationId);
 
 // Future<void> forgetPassword();
 }

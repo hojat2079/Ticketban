@@ -41,4 +41,8 @@ class AppPreferences {
   Future<String> loadRefreshToken() async {
     return _shP.getString(refreshTokenKey) ?? "";
   }
+
+  Future<bool> clear() async {
+    return _shP.clear();
+  }
 }
