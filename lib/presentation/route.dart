@@ -11,6 +11,7 @@ import 'package:ticketban_mobile/presentation/screen/auth/register_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
+import 'package:ticketban_mobile/presentation/screen/spalsh.dart';
 
 class AppRoute {
   final getIt = GetIt.instance;
@@ -20,6 +21,15 @@ class AppRoute {
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      case SplashScreen.route:
+        return MaterialPageRoute(
+          builder: (_) {
+            return const Directionality(
+              textDirection: TextDirection.rtl,
+              child: SplashScreen(),
+            );
+          },
+        );
       case LoginScreen.route:
         return MaterialPageRoute(
           builder: (_) {

@@ -17,7 +17,7 @@ import 'package:ticketban_mobile/util/extension.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String headText = 'ورود';
-  static const String route = '/';
+  static const String route = '/login';
 
   const LoginScreen({Key? key}) : super(key: key);
 
