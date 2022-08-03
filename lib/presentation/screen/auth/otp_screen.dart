@@ -228,11 +228,10 @@ class _OtpScreenState extends State<OtpScreen> {
   void _navigateToHomePage(BuildContext context) {
     //fix
     Navigator.of(context)
-        .pushNamedAndRemoveUntil(HomeScreen.route, (route) => route.isFirst);
+        .pushNamedAndRemoveUntil(HomeScreen.route, (route) => false);
   }
 
   void _navigateToLoginPage(BuildContext context) {
-    Navigator.of(context)
-        .popUntil((route) => route.settings.name == RegisterScreen.route);
+    Navigator.of(context).popUntil((route) => route.isFirst);
   }
 }

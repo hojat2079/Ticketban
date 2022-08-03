@@ -9,6 +9,7 @@ import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart
 import 'package:ticketban_mobile/presentation/screen/auth/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/auth_root.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/bloc/auth_bloc.dart';
+import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/otp_screen.dart';
 import 'package:ticketban_mobile/util/extension.dart';
 
@@ -23,12 +24,9 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _nameController =
-      TextEditingController(text: 'دانیال پرندوار');
-  final TextEditingController _phoneController =
-      TextEditingController(text: '09382308441');
-  final TextEditingController _passwordController =
-      TextEditingController(text: '1234567890');
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -62,11 +60,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             if (state is AuthErrorState) {
               context.showSnackBar(state.error.message);
             } else if (state is AuthLogin) {
-              //fix
-              // Navigator.of(context).popUntil(
-              //   (route) => route.settings.name == LoginScreen.route,
-              // );
-              Navigator.pop(context);
+              Navigator.of(context).popUntil((route) => route.isFirst);
             } else if (state is AuthOtp) {
               Navigator.of(context).pushNamed(OtpScreen.route);
             }
