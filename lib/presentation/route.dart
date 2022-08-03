@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ticketban_mobile/domain/repository/auth_repository.dart';
-import 'package:ticketban_mobile/presentation/screen/add_ticket/add_ticket_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/bloc/auth_bloc.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/forget_password_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
@@ -10,8 +9,9 @@ import 'package:ticketban_mobile/presentation/screen/auth/otp_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/register_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/splash.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/add_ticket/add_ticket_screen.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/list_ticket_screen.dart';
 
 class AppRoute {
   final getIt = GetIt.instance;
@@ -111,12 +111,14 @@ class AppRoute {
           );
         });
       case AddNewTicketScreen.route:
-        return MaterialPageRoute(builder: (context) {
-          return const Directionality(
-            textDirection: TextDirection.rtl,
-            child: AddNewTicketScreen(),
-          );
-        });
+        return MaterialPageRoute(
+          builder: (context) {
+            return const Directionality(
+              textDirection: TextDirection.rtl,
+              child: AddNewTicketScreen(),
+            );
+          },
+        );
       case ListTicketScreen.route:
         return MaterialPageRoute(
           builder: (context) {

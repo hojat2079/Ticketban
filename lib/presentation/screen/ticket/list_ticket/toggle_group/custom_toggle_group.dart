@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/custom_toggle_button_selected.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/custom_toggle_button_unselected.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/toggle_group/custom_toggle_button_selected.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/toggle_group/custom_toggle_button_unselected.dart';
 
 class CustomToggleGroup extends StatelessWidget {
   const CustomToggleGroup({Key? key}) : super(key: key);

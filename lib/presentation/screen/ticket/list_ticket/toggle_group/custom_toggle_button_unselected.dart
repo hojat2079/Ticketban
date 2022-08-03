@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/badge_widget.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/toggle_group/badge_widget.dart';
 
 class CustomToggleButtonUnSelected extends StatelessWidget {
   final String text;

@@ -9,13 +9,13 @@ import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
-import 'package:ticketban_mobile/presentation/screen/add_ticket/add_ticket_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/avatar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/menu_item.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/add_ticket/add_ticket_screen.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/list_ticket_screen.dart';
 
 import 'bloc/home_bloc.dart';
 

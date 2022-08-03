@@ -19,7 +19,9 @@ class DropDownTicketType extends StatelessWidget {
     'اداری': LightColorPalette.purpleDropDown,
   };
 
-  DropDownTicketType({Key? key}) : super(key: key);
+  final Function(String) onTap;
+
+  DropDownTicketType({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +126,9 @@ class DropDownTicketType extends StatelessWidget {
               ),
             )
             .toList(),
-        onChanged: (value) {},
+        onChanged: (String? value) {
+          onTap(value!);
+        },
       ),
     );
   }

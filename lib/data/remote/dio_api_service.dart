@@ -18,7 +18,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
       InterceptorsWrapper(onRequest: ((options, handler) async {
         final accessToken = TokenContainer.instance().accessToken;
         if (accessToken != null && accessToken.isNotEmpty) {
-          options.headers['Authorization'] = 'Bearer $accessToken';
+          options.headers['Cookie'] = 'access-token=$accessToken';
         }
         handler.next(options);
       }), onError: (error, handler) {
