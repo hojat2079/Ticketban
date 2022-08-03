@@ -85,7 +85,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   BlocBuilder<HomeBloc, HomeState>(
                     builder: (context, state) {
                       return Text(
-                        state is HomeSuccess ? state.username : '',
+                        state is HomeSuccess
+                            ? state.username
+                            : state is HomeBackExit
+                                ? state.username
+                                : '',
                         style: themeData.textTheme.headline3,
                       );
                     },

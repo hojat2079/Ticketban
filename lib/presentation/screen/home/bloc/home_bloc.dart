@@ -12,6 +12,7 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final TicketUserRepository ticketUserRepository;
   final AuthRepository authRepository;
+  late String name;
 
   HomeBloc(this.ticketUserRepository, this.authRepository)
       : super(HomeInitial()) {
@@ -22,7 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         if (event.exit) {
           await emitExitState(emit);
         } else {
-          emit(HomeBackExit());
+          emit(HomeBackExit(name));
         }
       }
     });
@@ -36,7 +37,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     } else {
       info = const UserInfoResponse('کاربر', 'مهمان');
     }
-    emit(HomeSuccess(info.toString()));
+    name = info.toString();
+    emit(HomeSuccess(name));
   }
 
   Future<void> emitExitState(Emitter<HomeState> emit) async {

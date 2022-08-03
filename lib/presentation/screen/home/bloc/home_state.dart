@@ -24,6 +24,10 @@ class HomeExitSuccess extends HomeState {
 }
 
 class HomeBackExit extends HomeState {
+  final String username;
+
+  const HomeBackExit(this.username);
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [username];
 }
