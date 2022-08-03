@@ -3,6 +3,7 @@ import 'package:ticketban_mobile/data/remote/dto/login_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/register_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/ticket_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/ticket_user_response.dart';
+import 'package:ticketban_mobile/data/remote/dto/user_info_response.dart';
 
 abstract class ApiService {
   //auth
@@ -22,4 +23,6 @@ abstract class ApiService {
   Future<List<TicketUserDto>> getAllTicketUserFiltered(String status);
 
   Future<bool> deleteTicket(String ticketId);
+
+  Future<UserInfoResponse> userInfo(String userId);
 }

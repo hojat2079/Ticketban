@@ -1,6 +1,7 @@
 import 'package:ticketban_mobile/data/remote/api_service.dart';
 import 'package:ticketban_mobile/data/remote/dto/ticket_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/ticket_user_response.dart';
+import 'package:ticketban_mobile/data/remote/dto/user_info_response.dart';
 import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 
 class TicketUserRepositoryImpl implements TicketUserRepository {
@@ -26,5 +27,10 @@ class TicketUserRepositoryImpl implements TicketUserRepository {
   @override
   Future<bool> deleteTicket(String ticketId) {
     return apiService.deleteTicket(ticketId);
+  }
+
+  @override
+  Future<UserInfoResponse> userInfo(String userId) {
+    return apiService.userInfo(userId);
   }
 }

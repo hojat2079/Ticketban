@@ -2,6 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ticketban_mobile/data/repository/ticket_user_repository_impl.dart';
+import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
@@ -11,6 +15,8 @@ import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/avatar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/menu_item.dart';
 import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
+
+import 'bloc/home_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String route = '/home';
@@ -24,6 +30,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final getIt = GetIt.instance;
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.surfaceVariant,
@@ -37,63 +44,74 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: themeData.colorScheme.surfaceVariant,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: padding36H,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                sizedBoxH24,
-                const HomeAppBar(),
-                sizedBoxH24,
-                const AvatarWidget(),
-                sizedBoxH12,
-                Text(
-                  'دانیال کاظمی',
-                  style: themeData.textTheme.headline3,
-                ),
-                sizedBoxH36,
-                CustomMenuItem(
-                  icon: Assets.image.svg.myTicket.svg(),
-                  text: Text(
-                    item1,
-                    style: themeData.textTheme.subtitle1,
+      body: BlocProvider<HomeBloc>(
+        create: (context) => HomeBloc(
+          getIt<TicketUserRepository>(),
+        )..add(
+            HomeStarted(),
+          ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: padding36H,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  sizedBoxH24,
+                  const HomeAppBar(),
+                  sizedBoxH24,
+                  const AvatarWidget(),
+                  sizedBoxH12,
+                  BlocBuilder<HomeBloc, HomeState>(
+                    builder: (context, state) {
+                      return Text(
+                        state is HomeSuccess ? state.username : '',
+                        style: themeData.textTheme.headline3,
+                      );
+                    },
                   ),
-                  onTap: () {
-                    Navigator.pushNamed(context, ListTicketScreen.route);
-                  },
-                ),
-                sizedBoxH20,
-                CustomMenuItem(
-                  icon: Assets.image.svg.allTicket.svg(),
-                  text: Text(item2, style: themeData.textTheme.subtitle1),
-                  onTap: () {
-                    Navigator.pushNamed(context, AddNewTicketScreen.route);
-                  },
-                ),
-                sizedBoxH20,
-                CustomMenuItem(
-                  icon: Assets.image.svg.passwordItem.svg(),
-                  text: Text(item3, style: themeData.textTheme.subtitle1),
-                  onTap: () {
-                    Navigator.pushNamed(context, ChangePasswordScreen.route);
-                  },
-                ),
-                sizedBoxH20,
-                CustomMenuItem(
-                  icon: Assets.image.svg.exit.svg(),
-                  text: Text(item4, style: themeData.textTheme.subtitle1),
-                  onTap: () async {
-                    await showCustomDialog(
-                      context: context,
-                      title: 'آیا از خروج خود اطمینان دارید؟',
-                      themeData: themeData,
-                    );
-                  },
-                ),
-              ],
+                  sizedBoxH36,
+                  CustomMenuItem(
+                    icon: Assets.image.svg.myTicket.svg(),
+                    text: Text(
+                      item1,
+                      style: themeData.textTheme.subtitle1,
+                    ),
+                    onTap: () {
+                      Navigator.pushNamed(context, ListTicketScreen.route);
+                    },
+                  ),
+                  sizedBoxH20,
+                  CustomMenuItem(
+                    icon: Assets.image.svg.allTicket.svg(),
+                    text: Text(item2, style: themeData.textTheme.subtitle1),
+                    onTap: () {
+                      Navigator.pushNamed(context, AddNewTicketScreen.route);
+                    },
+                  ),
+                  sizedBoxH20,
+                  CustomMenuItem(
+                    icon: Assets.image.svg.passwordItem.svg(),
+                    text: Text(item3, style: themeData.textTheme.subtitle1),
+                    onTap: () {
+                      Navigator.pushNamed(context, ChangePasswordScreen.route);
+                    },
+                  ),
+                  sizedBoxH20,
+                  CustomMenuItem(
+                    icon: Assets.image.svg.exit.svg(),
+                    text: Text(item4, style: themeData.textTheme.subtitle1),
+                    onTap: () async {
+                      await showCustomDialog(
+                        context: context,
+                        title: 'آیا از خروج خود اطمینان دارید؟',
+                        themeData: themeData,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

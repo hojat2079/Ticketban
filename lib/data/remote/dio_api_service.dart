@@ -5,6 +5,7 @@ import 'package:ticketban_mobile/data/remote/dto/login_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/register_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/ticket_request.dart';
 import 'package:ticketban_mobile/data/remote/dto/ticket_user_response.dart';
+import 'package:ticketban_mobile/data/remote/dto/user_info_response.dart';
 import 'package:ticketban_mobile/data/remote/util/http_validator.dart';
 import 'package:ticketban_mobile/domain/model/token_container.dart';
 import 'package:ticketban_mobile/util/constant.dart';
@@ -72,7 +73,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
     final response = await dio.get(Constant.getAllTicketUser);
     validateResponse(response);
     final List<TicketUserDto> list = [];
-    for (var object in (response.data as List)) {
+    for (var object in (response.data['data']['arr'] as List)) {
       list.add(TicketUserDto.fromJson(object));
     }
     return list;
@@ -85,7 +86,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
     );
     validateResponse(response);
     final List<TicketUserDto> list = [];
-    for (var object in (response.data as List)) {
+    for (var object in (response.data['data']['arr'] as List)) {
       list.add(TicketUserDto.fromJson(object));
     }
     return list;
@@ -95,5 +96,15 @@ class DioApiService with HttpResponseValidator implements ApiService {
   Future<bool> deleteTicket(String ticketId) async {
     final response = await dio.delete('${Constant.deleteTicket}/:$ticketId');
     return validateResponse(response);
+  }
+
+  @override
+  Future<UserInfoResponse> userInfo(String userId) async {
+    final response = await dio.post(
+      Constant.userInfo,
+      data: {"userId": userId},
+    );
+    validateResponse(response);
+    return UserInfoResponse.fromJson(response.data['data']);
   }
 }

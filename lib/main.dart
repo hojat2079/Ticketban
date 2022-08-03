@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/di/app.dart';
 import 'package:ticketban_mobile/presentation/route.dart';
-import 'package:ticketban_mobile/presentation/screen/add_ticket/add_ticket_screen.dart';
-import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
-import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
-import 'package:ticketban_mobile/presentation/screen/home/home.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/list_ticket_screen.dart';
-import 'package:ticketban_mobile/presentation/screen/splash.dart';
 import 'package:ticketban_mobile/presentation/theme.dart';
 
 void main() async {

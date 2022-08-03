@@ -1,6 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String usernameKey = 'username';
+const String userIdKey = 'userId';
 const String nameKey = 'name';
 const String tokenKey = 'token';
 const String refreshTokenKey = 'refresh_token';
@@ -16,6 +17,14 @@ class AppPreferences {
 
   Future<String> getUsername() async {
     return _shP.getString(usernameKey) ?? "";
+  }
+
+  Future<bool> setUserId(String userId) async {
+    return _shP.setString(userIdKey, userId);
+  }
+
+  Future<String> getUserId() async {
+    return _shP.getString(userIdKey) ?? "";
   }
 
   Future<bool> setName(String name) async {

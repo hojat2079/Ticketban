@@ -4,6 +4,7 @@ class TokenContainer extends Equatable {
   String? accessToken;
   String? refreshToken;
   String? verificationId;
+  String? userId;
 
   static TokenContainer? _instance;
 
@@ -17,6 +18,7 @@ class TokenContainer extends Equatable {
   void clear() {
     accessToken = '';
     refreshToken = '';
+    userId = '';
   }
 
   @override

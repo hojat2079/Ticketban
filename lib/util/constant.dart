@@ -12,6 +12,7 @@ class Constant {
   static const String getAllTicketUser = 'user/get-user-tickets';
   static const String getAllTicketUserFiltered = 'user/filter-user-tickets';
   static const String deleteTicket = 'user/delete-ticket';
+  static const String userInfo = 'user/user_info';
 
   Constant._();
 }

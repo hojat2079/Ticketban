@@ -10,7 +10,7 @@ class AuthResponse extends Equatable {
       this.token, this.refreshToken, this.userId, this.verificationId);
 
   @override
-  List<Object> get props => [token, refreshToken];
+  List<Object?> get props => [token, refreshToken, userId, verificationId];
 
   AuthResponse.fromJson(Map<String, dynamic> json)
       : token = json['accessToken'],

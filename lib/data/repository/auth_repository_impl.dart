@@ -17,14 +17,18 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> loadTokenFromDb() async {
     final token = await appPreferences.loadToken();
     final refreshToken = await appPreferences.loadRefreshToken();
+    final userId = await appPreferences.getUserId();
     TokenContainer.instance().refreshToken = refreshToken;
     TokenContainer.instance().accessToken = token;
+    TokenContainer.instance().userId = userId;
   }
 
   @override
   Future<void> login(LoginRequest loginRequest) async {
     final AuthResponse response = await apiService.login(loginRequest);
     await saveTokenToDb(response.token, response.refreshToken);
+    await appPreferences.setUserId(response.userId!);
+    token.userId = response.userId;
   }
 
   @override
