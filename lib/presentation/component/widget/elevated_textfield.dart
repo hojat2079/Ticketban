@@ -20,7 +20,7 @@ class ElevatedTextField extends StatelessWidget {
   static const double defaultRightPadding = 16;
   static const double defaultLeftPadding = 16;
   static const double defaultShadowBlurRadius = 30;
-  static const double defaultWidthBorder = 30;
+  static const double defaultWidthBorder = 1;
   static const Color defaultColorBorder = Color(0xffEAEAEA);
 
   const ElevatedTextField({

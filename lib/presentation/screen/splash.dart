@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:ticketban_mobile/domain/model/token_container.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_text.dart';
-import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home.dart';
 
@@ -38,11 +38,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
 
+    //change status bar color
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.surfaceVariant,
       statusBarIconBrightness: Brightness.dark,
     ));
 
+    //handle only portrait Screen
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -56,17 +58,23 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Assets.image.svg.logo.svg(width: 60),
+              _logo(),
               sizedBoxH8,
-              GradientText(
-                'تیکت بان',
-                gradient: LightColorPalette.defaultTextGradiant,
-                style: themeData.textTheme.headline3,
-              ),
+              _headText(themeData),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _logo() => Assets.image.svg.logo.svg(width: 60);
+
+  Widget _headText(ThemeData themeData) {
+    return GradientText(
+      'تیکت بان',
+      gradient: LightColorPalette.defaultTextGradiant,
+      style: themeData.textTheme.headline3,
     );
   }
 }
