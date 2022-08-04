@@ -62,7 +62,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             } else if (state is AuthLogin) {
               Navigator.of(context).popUntil((route) => route.isFirst);
             } else if (state is AuthOtp) {
-              Navigator.of(context).pushNamed(OtpScreen.route);
+              Navigator.of(context).pushNamed(OtpScreen.routeAfterRegister);
             }
           },
           child: Container(

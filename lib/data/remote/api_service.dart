@@ -13,8 +13,6 @@ abstract class ApiService {
 
   Future<bool> verifyOtp(String otp, String verificationId);
 
-  // Future<void> forgetPassword();
-
   Future<bool> changePassword(String currentPass, String newPass);
 
   //ticket

@@ -8,29 +8,35 @@ import 'package:ticketban_mobile/data/remote/dto/ticket_user_response.dart';
 import 'package:ticketban_mobile/data/remote/dto/user_info_response.dart';
 import 'package:ticketban_mobile/data/remote/util/http_validator.dart';
 import 'package:ticketban_mobile/domain/model/token_container.dart';
-import 'package:ticketban_mobile/util/constant.dart';
+import 'package:ticketban_mobile/data/remote/util/constant.dart';
 
 class DioApiService with HttpResponseValidator implements ApiService {
   late Dio dio;
 
   DioApiService(this.dio) {
     dio.interceptors.add(
-      InterceptorsWrapper(onRequest: ((options, handler) async {
-        final accessToken = TokenContainer.instance().accessToken;
-        if (accessToken != null && accessToken.isNotEmpty) {
-          options.headers['Cookie'] = 'access-token=$accessToken';
-        }
-        handler.next(options);
-      }), onError: (error, handler) {
-        //todo
-      }),
+      InterceptorsWrapper(
+        //add token to header
+        onRequest: (options, handler) async {
+          final accessToken = TokenContainer.instance().accessToken;
+          if (accessToken != null && accessToken.isNotEmpty) {
+            options.headers['Cookie'] = 'access-token=$accessToken';
+          }
+          handler.next(options);
+        },
+
+        //handle refreshToken
+        onError: (error, handler) {
+          //todo
+        },
+      ),
     );
   }
 
   @override
   Future<AuthResponse> login(LoginRequest loginRequest) async {
     final response = await dio.post(
-      Constant.loginUrl,
+      RemoteConstant.loginUrl,
       data: loginRequest.toMap(),
     );
     validateResponse(response);
@@ -40,7 +46,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<AuthResponse> register(RegisterRequest registerRequest) async {
     final response = await dio.post(
-      Constant.registerUrl,
+      RemoteConstant.registerUrl,
       data: registerRequest.toMap(),
     );
     validateResponse(response);
@@ -50,7 +56,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<bool> verifyOtp(String otp, String verificationId) async {
     final response = await dio.post(
-      Constant.verifyOtpUrl,
+      RemoteConstant.verifyOtpUrl,
       data: {
         'otp': otp,
         'verificationId': verificationId,
@@ -62,7 +68,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<bool> changePassword(String currentPass, String newPass) async {
     final response = await dio.post(
-      Constant.changePassword,
+      RemoteConstant.changePassword,
       data: {
         'currentPassword': currentPass,
         'newPassword': newPass,
@@ -75,7 +81,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<bool> createTicket(TicketRequest ticketRequest) async {
     final response = await dio.post(
-      Constant.createTicket,
+      RemoteConstant.createTicket,
       data: ticketRequest.toMap(),
     );
     return validateResponse(response);
@@ -83,9 +89,12 @@ class DioApiService with HttpResponseValidator implements ApiService {
 
   @override
   Future<List<TicketUserDto>> getAllUserTicket() async {
-    final response = await dio.get(Constant.getAllTicketUser);
+    final response = await dio.get(RemoteConstant.getAllTicketUser);
     validateResponse(response);
+
+    //result to this list
     final List<TicketUserDto> list = [];
+
     for (var object in (response.data['data']['arr'] as List)) {
       list.add(TicketUserDto.fromJson(object[0]));
     }
@@ -95,10 +104,13 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<List<TicketUserDto>> getAllTicketUserFiltered(String status) async {
     final response = await dio.get(
-      '${Constant.getAllTicketUserFiltered}/?status=$status',
+      '${RemoteConstant.getAllTicketUserFiltered}/?status=$status',
     );
     validateResponse(response);
+
+    //result to this list
     final List<TicketUserDto> list = [];
+
     for (var object in (response.data['data']['arr'] as List)) {
       list.add(TicketUserDto.fromJson(object));
     }
@@ -107,14 +119,15 @@ class DioApiService with HttpResponseValidator implements ApiService {
 
   @override
   Future<bool> deleteTicket(String ticketId) async {
-    final response = await dio.delete('${Constant.deleteTicket}/:$ticketId');
+    final response =
+        await dio.delete('${RemoteConstant.deleteTicket}/:$ticketId');
     return validateResponse(response);
   }
 
   @override
   Future<UserInfoResponse> userInfo(String userId) async {
     final response = await dio.post(
-      Constant.userInfo,
+      RemoteConstant.userInfo,
       data: {"userId": userId},
     );
     validateResponse(response);

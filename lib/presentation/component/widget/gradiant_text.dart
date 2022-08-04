@@ -14,6 +14,7 @@ class GradientText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //this widget for gradiant text used
     return ShaderMask(
       blendMode: BlendMode.srcIn,
       shaderCallback: (bounds) => gradient.createShader(

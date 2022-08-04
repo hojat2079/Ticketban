@@ -13,6 +13,5 @@ class HttpResponseValidator {
             'خطای نامشخص',
       );
     }
-    return false;
   }
 }

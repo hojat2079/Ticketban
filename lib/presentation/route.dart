@@ -21,6 +21,7 @@ class AppRoute {
 
   Route onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
+      //splash screen
       case SplashScreen.route:
         return MaterialPageRoute(
           builder: (_) {
@@ -30,6 +31,8 @@ class AppRoute {
             );
           },
         );
+
+      //login screen
       case LoginScreen.route:
         return MaterialPageRoute(
           builder: (_) {
@@ -42,6 +45,8 @@ class AppRoute {
             );
           },
         );
+
+      //register screen
       case RegisterScreen.route:
         return MaterialPageRoute(
           builder: (_) {
@@ -54,6 +59,8 @@ class AppRoute {
             );
           },
         );
+
+      //forget password screen
       case ForgetPasswordScreen.route:
         return MaterialPageRoute(
           builder: (_) {
@@ -66,7 +73,9 @@ class AppRoute {
             );
           },
         );
-      case OtpScreen.route:
+
+      //otp screen after register screen
+      case OtpScreen.routeAfterRegister:
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider.value(
@@ -81,7 +90,9 @@ class AppRoute {
             );
           },
         );
-      case '/otp-forget-password':
+
+      //otp screen after forgetPassword screen
+      case OtpScreen.routeAfterForgetPassword:
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider.value(
@@ -96,6 +107,8 @@ class AppRoute {
             );
           },
         );
+
+      //home screen
       case HomeScreen.route:
         return MaterialPageRoute(builder: (context) {
           return const Directionality(
@@ -103,6 +116,8 @@ class AppRoute {
             child: HomeScreen(),
           );
         });
+
+      //changePassword screen
       case ChangePasswordScreen.route:
         return MaterialPageRoute(builder: (context) {
           return const Directionality(
@@ -110,6 +125,8 @@ class AppRoute {
             child: ChangePasswordScreen(),
           );
         });
+
+      //newTicket Screen
       case AddNewTicketScreen.route:
         return MaterialPageRoute(
           builder: (context) {
@@ -119,6 +136,8 @@ class AppRoute {
             );
           },
         );
+
+      //listTicket screen
       case ListTicketScreen.route:
         return MaterialPageRoute(
           builder: (context) {

@@ -13,7 +13,6 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final bool obscure = false;
   final TextEditingController? controller;
   final int? maxLength;
   final TextInputType keyboardType;
@@ -39,22 +38,9 @@ class CustomTextField extends StatelessWidget {
         ),
         counterText: "",
         isDense: true,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: circular21,
-          borderSide: BorderSide(color: themeData.dividerColor, width: 0.5),
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: circular21,
-          borderSide: BorderSide(color: Colors.black, width: 1),
-        ),
-        label: Text(
-          hint,
-          style: themeData.textTheme.bodyText2!.apply(
-              color: themeData.colorScheme.onSurface.withOpacity(
-                0.7,
-              ),
-              fontSizeFactor: 0.9),
-        ),
+        enabledBorder: _enabledBorder(themeData),
+        focusedBorder: _focusedBorder(),
+        label: _hintText(themeData),
         prefixIconConstraints: const BoxConstraints(
           minWidth: iconSize,
           minHeight: iconSize,
@@ -63,6 +49,31 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
       ),
       obscureText: isPassword,
+    );
+  }
+
+  OutlineInputBorder _focusedBorder() {
+    return const OutlineInputBorder(
+      borderRadius: circular21,
+      borderSide: BorderSide(color: Colors.black, width: 1),
+    );
+  }
+
+  OutlineInputBorder _enabledBorder(ThemeData themeData) {
+    return OutlineInputBorder(
+      borderRadius: circular21,
+      borderSide: BorderSide(color: themeData.dividerColor, width: 0.5),
+    );
+  }
+
+  Text _hintText(ThemeData themeData) {
+    return Text(
+      hint,
+      style: themeData.textTheme.bodyText2!.apply(
+          color: themeData.colorScheme.onSurface.withOpacity(
+            0.7,
+          ),
+          fontSizeFactor: 0.9),
     );
   }
 }

@@ -1,21 +1,22 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ticketban_mobile/data/local/app_prefernces.dart';
+import 'package:ticketban_mobile/data/local/app_preferences.dart';
 import 'package:ticketban_mobile/data/remote/api_service.dart';
 import 'package:ticketban_mobile/data/remote/dio_api_service.dart';
 import 'package:ticketban_mobile/data/repository/auth_repository_impl.dart';
 import 'package:ticketban_mobile/data/repository/ticket_user_repository_impl.dart';
 import 'package:ticketban_mobile/domain/repository/auth_repository.dart';
 import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
-import 'package:ticketban_mobile/util/constant.dart';
+import 'package:ticketban_mobile/data/remote/util/constant.dart';
 
 final instance = GetIt.instance;
 
 Future<void> initModule() async {
+  //dio instance
   final dio = Dio(
     BaseOptions(
-      baseUrl: Constant.baseUrl,
+      baseUrl: RemoteConstant.baseUrl,
     ),
   );
   instance.registerLazySingleton<Dio>(() => dio);
@@ -30,6 +31,7 @@ Future<void> initModule() async {
   instance.registerLazySingleton<SharedPreferences>(
     () => sharedPreferences,
   );
+  //shared preferences implemented
   instance.registerLazySingleton<AppPreferences>(
       () => AppPreferences(instance<SharedPreferences>()));
 

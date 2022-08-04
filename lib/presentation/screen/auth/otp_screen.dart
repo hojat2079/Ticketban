@@ -20,7 +20,8 @@ class OtpScreen extends StatefulWidget {
   final String title;
   final String desc;
   static const Color endButtonColor = Color(0xff2872FB);
-  static const String route = '/otp';
+  static const String routeAfterRegister = '/otp-register';
+  static const String routeAfterForgetPassword = '/otp-forget-password';
 
   const OtpScreen({
     Key? key,

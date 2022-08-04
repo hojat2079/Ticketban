@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 
@@ -29,42 +28,57 @@ class GradiantButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: borderRadius,
-            ),
+        //add corner radius for button
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: borderRadius,
           ),
-          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          maximumSize: MaterialStateProperty.all(Size(width, height)),
-          padding: MaterialStateProperty.all(padding0)),
-      child: Ink(
-        decoration: BoxDecoration(
-          gradient: gradient,
-          borderRadius: borderRadius,
         ),
-        child: Center(
-          child: Container(
-            alignment: Alignment.center,
-            constraints: BoxConstraints(
-              minWidth: width,
-              minHeight: height,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  label,
-                  textAlign: TextAlign.center,
-                  style: textStyle,
-                ),
-                if (icon != null) sizedBoxW8,
-                if (icon != null) icon!,
-              ],
-            ),
+
+        //button size
+        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+        maximumSize: MaterialStateProperty.all(Size(width, height)),
+
+        //button padding
+        padding: MaterialStateProperty.all(padding0),
+      ),
+      child: _gradiantWidget(),
+    );
+  }
+
+  Widget _gradiantWidget() {
+    return Ink(
+      decoration: BoxDecoration(
+        gradient: gradient,
+        borderRadius: borderRadius,
+      ),
+      child: Center(
+        child: Container(
+          alignment: Alignment.center,
+          constraints: BoxConstraints(
+            minWidth: width,
+            minHeight: height,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _labelText(),
+              //handle icon in button
+              if (icon != null) sizedBoxW8,
+              if (icon != null) icon!,
+            ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _labelText() {
+    return Text(
+      label,
+      textAlign: TextAlign.center,
+      style: textStyle,
     );
   }
 }

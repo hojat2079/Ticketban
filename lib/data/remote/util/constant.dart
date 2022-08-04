@@ -1,4 +1,4 @@
-class Constant {
+class RemoteConstant {
   //api
   static const String baseUrl = 'http://10.0.2.2:5000/api/v1/';
 
@@ -15,5 +15,5 @@ class Constant {
   static const String deleteTicket = 'user/delete-ticket';
   static const String userInfo = 'user/user_info';
 
-  Constant._();
+  RemoteConstant._();
 }

@@ -1,4 +1,4 @@
-import 'package:ticketban_mobile/data/local/app_prefernces.dart';
+import 'package:ticketban_mobile/data/local/app_preferences.dart';
 import 'package:ticketban_mobile/data/remote/api_service.dart';
 import 'package:ticketban_mobile/data/remote/dto/auth_response.dart';
 import 'package:ticketban_mobile/data/remote/dto/login_request.dart';
