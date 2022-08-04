@@ -51,6 +51,13 @@ class AppPreferences {
     return _shP.getString(refreshTokenKey) ?? "";
   }
 
+  Future<bool> saveAllToken(String token, String refreshToken) async {
+    final bool saveTokenResult =
+        await _shP.setString(refreshTokenKey, refreshToken);
+    final bool saveRefreshTokenResult = await _shP.setString(tokenKey, token);
+    return saveTokenResult && saveRefreshTokenResult;
+  }
+
   Future<bool> clear() async {
     return _shP.clear();
   }

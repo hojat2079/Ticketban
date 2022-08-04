@@ -15,6 +15,8 @@ abstract class ApiService {
 
   Future<bool> changePassword(String currentPass, String newPass);
 
+  Future<void> refreshToken();
+
   //ticket
   Future<bool> createTicket(TicketRequest ticketRequest);
 

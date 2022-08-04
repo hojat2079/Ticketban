@@ -12,24 +12,64 @@ import 'package:ticketban_mobile/data/remote/util/constant.dart';
 
 class DioApiService with HttpResponseValidator implements ApiService {
   late Dio dio;
+  final TokenContainer tokenContainer = TokenContainer.instance();
 
   DioApiService(this.dio) {
     dio.interceptors.add(
       InterceptorsWrapper(
         //add token to header
         onRequest: (options, handler) async {
-          final accessToken = TokenContainer.instance().accessToken;
+          final accessToken = tokenContainer.accessToken;
           if (accessToken != null && accessToken.isNotEmpty) {
-            options.headers['Cookie'] = 'access-token=$accessToken';
+            options.headers['Cookie'] =
+                'access-token=${tokenContainer.accessToken}';
           }
           handler.next(options);
         },
 
         //handle refreshToken
-        onError: (error, handler) {
-          //todo
+        onError: (error, handler) async {
+          final accessToken = tokenContainer.accessToken;
+          if ((error.response?.statusCode == 401 ||
+                  error.response?.statusCode == 403) &&
+              accessToken != null &&
+              accessToken.isNotEmpty) {
+            final refreshResponse = await refreshToken();
+            if (refreshResponse) {
+              final againResponse = await _retry(error.requestOptions);
+              return handler.resolve(againResponse);
+            }
+          }
         },
       ),
+    );
+  }
+
+  @override
+  Future<bool> refreshToken() async {
+    final String refreshToken = TokenContainer.instance().refreshToken!;
+    final response = await dio.post(RemoteConstant.refreshToken,
+        data: {'refreshToken': refreshToken});
+    final bool refreshResult = validateResponse(response);
+    if (refreshResult) {
+      saveToken(response.data);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  //retry method after unauthorized error
+  Future<Response<dynamic>> _retry(RequestOptions requestOptions) async {
+    final options = Options(
+      method: requestOptions.method,
+      headers: requestOptions.headers,
+    );
+    return dio.request<dynamic>(
+      requestOptions.path,
+      data: requestOptions.data,
+      queryParameters: requestOptions.queryParameters,
+      options: options,
     );
   }
 
@@ -132,5 +172,10 @@ class DioApiService with HttpResponseValidator implements ApiService {
     );
     validateResponse(response);
     return UserInfoResponse.fromJson(response.data['data']);
+  }
+
+  void saveToken(data) {
+    tokenContainer.accessToken = data['accessToken'];
+    tokenContainer.refreshToken = data['refreshToken'];
   }
 }

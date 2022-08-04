@@ -7,6 +7,7 @@ class RemoteConstant {
   static const String registerUrl = 'auth/register';
   static const String verifyOtpUrl = 'auth/verify-otp';
   static const String changePassword = 'auth/change-password';
+  static const String refreshToken = 'auth/refresh-token';
 
   //ticket
   static const String createTicket = 'user/create-ticket';
