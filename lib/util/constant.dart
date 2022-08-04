@@ -6,6 +6,7 @@ class Constant {
   static const String loginUrl = 'auth/login';
   static const String registerUrl = 'auth/register';
   static const String verifyOtpUrl = 'auth/verify-otp';
+  static const String changePassword = 'auth/change-password';
 
   //ticket
   static const String createTicket = 'user/create-ticket';

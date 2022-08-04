@@ -8,6 +8,8 @@ abstract class AuthRepository {
 
   Future<bool> verifyOtp(String otp);
 
+  Future<bool> changePassword(String currentPass, String newPass);
+
   Future<bool> saveTokenToDb(String token, String refreshToken);
 
   Future<void> loadTokenFromDb();

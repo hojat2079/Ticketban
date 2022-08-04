@@ -39,6 +39,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
+  Future<bool> changePassword(String currentPass, String newPass) {
+    return apiService.changePassword(currentPass, newPass);
+  }
+
+  @override
   Future<bool> saveTokenToDb(String token, String refreshToken) async {
     final bool resultSaveToken = await appPreferences.saveToken(token);
     final bool resultSaveRefreshToken =

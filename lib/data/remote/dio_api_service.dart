@@ -60,6 +60,19 @@ class DioApiService with HttpResponseValidator implements ApiService {
   }
 
   @override
+  Future<bool> changePassword(String currentPass, String newPass) async {
+    final response = await dio.post(
+      Constant.changePassword,
+      data: {
+        'currentPassword': currentPass,
+        'newPassword': newPass,
+        'confirmNewPassword': newPass,
+      },
+    );
+    return validateResponse(response);
+  }
+
+  @override
   Future<bool> createTicket(TicketRequest ticketRequest) async {
     final response = await dio.post(
       Constant.createTicket,
