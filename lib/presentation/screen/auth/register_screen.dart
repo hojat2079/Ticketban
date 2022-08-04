@@ -104,22 +104,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   sizedBoxH16,
                   CustomTextField(
-                    controller: _passwordController,
-                    hint: 'رمز عبور',
-                    isPassword: true,
-                    prefixIcon: Padding(
-                      padding: paddingSuffixIcon,
-                      child: Assets.image.svg.password.svg(width: 24),
-                    ),
-                    suffixIcon: InkWell(
-                      customBorder: const CircleBorder(),
-                      onTap: () {},
-                      child: Icon(
-                        Icons.visibility_off_outlined,
-                        color: themeData.colorScheme.onPrimary,
+                      controller: _passwordController,
+                      hint: 'رمز عبور',
+                      isPassword: true,
+                      prefixIcon: Padding(
+                        padding: paddingSuffixIcon,
+                        child: Assets.image.svg.password.svg(width: 24),
                       ),
-                    ),
-                  ),
+                      suffixIcon: _endPasswordIcon(themeData)),
                   sizedBoxH24,
                   BlocBuilder<AuthBloc, AuthState>(
                     buildWhen: (previous, current) {
@@ -152,5 +144,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ));
+  }
+
+  Widget _endPasswordIcon(ThemeData themeData) {
+    return InkWell(
+      customBorder: const CircleBorder(),
+      onTap: () {},
+      child: Icon(
+        Icons.visibility_off_outlined,
+        color: themeData.colorScheme.onPrimary,
+      ),
+    );
   }
 }

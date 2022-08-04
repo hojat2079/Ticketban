@@ -88,6 +88,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         padding: paddingSuffixIcon,
                         child: Assets.image.svg.passwordItem.svg(width: 24),
                       ),
+                      suffixIcon: _endPasswordIcon(themeData),
                     ),
                     sizedBoxH24,
                     _descriptionText(themeData, 'کلمه عبور جدید را وارد کنید:'),
@@ -99,6 +100,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         padding: paddingSuffixIcon,
                         child: Assets.image.svg.lock.svg(width: 24),
                       ),
+                      isPassword: true,
+                      suffixIcon: _endPasswordIcon(themeData),
                     ),
                     sizedBoxH24,
                     _descriptionText(
@@ -113,6 +116,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         padding: paddingSuffixIcon,
                         child: Assets.image.svg.lock.svg(width: 24),
                       ),
+                      isPassword: true,
+                      suffixIcon: _endPasswordIcon(themeData),
                     ),
                     sizedBoxH36,
                     BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
@@ -177,5 +182,16 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
 
   void passwordNoChanged(BuildContext context, String message) {
     context.showSnackBar(message);
+  }
+
+  Widget _endPasswordIcon(ThemeData themeData) {
+    return InkWell(
+      customBorder: const CircleBorder(),
+      onTap: () {},
+      child: Icon(
+        Icons.visibility_off_outlined,
+        color: themeData.colorScheme.onPrimary,
+      ),
+    );
   }
 }

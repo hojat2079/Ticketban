@@ -130,14 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: paddingSuffixIcon,
                   child: Assets.image.svg.password.svg(width: 24),
                 ),
-                suffixIcon: InkWell(
-                  customBorder: const CircleBorder(),
-                  onTap: () {},
-                  child: Icon(
-                    Icons.visibility_off_outlined,
-                    color: themeData.colorScheme.onPrimary,
-                  ),
-                ),
+                suffixIcon: _endPasswordIcon(themeData),
               ),
               sizedBoxH24,
               Row(
@@ -197,6 +190,17 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _endPasswordIcon(ThemeData themeData) {
+    return InkWell(
+      customBorder: const CircleBorder(),
+      onTap: () {},
+      child: Icon(
+        Icons.visibility_off_outlined,
+        color: themeData.colorScheme.onPrimary,
       ),
     );
   }
