@@ -52,6 +52,9 @@ class $AssetsImageSvgGen {
   /// File path: assets/image/svg/file.svg
   SvgGenImage get file => const SvgGenImage('assets/image/svg/file.svg');
 
+  /// File path: assets/image/svg/home.svg
+  SvgGenImage get home => const SvgGenImage('assets/image/svg/home.svg');
+
   /// File path: assets/image/svg/lock.svg
   SvgGenImage get lock => const SvgGenImage('assets/image/svg/lock.svg');
 

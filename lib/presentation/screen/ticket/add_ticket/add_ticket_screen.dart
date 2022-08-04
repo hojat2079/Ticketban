@@ -10,6 +10,7 @@ import 'package:ticketban_mobile/presentation/component/widget/elevated_textfiel
 import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.dart';
 import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
+import 'package:ticketban_mobile/presentation/screen/home/home_route.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/add_ticket/bloc/add_ticket_bloc.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/add_ticket/file.dart';
 import 'package:ticketban_mobile/util/extension.dart';
@@ -43,104 +44,98 @@ class _AddNewTicketScreenState extends State<AddNewTicketScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: themeData.colorScheme.surfaceVariant,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );
-    return Scaffold(
-      backgroundColor: themeData.colorScheme.surfaceVariant,
-      body: BlocProvider<AddTicketBloc>(
+
+    return HomeRoute(
+      child: BlocProvider<AddTicketBloc>(
         create: (context) {
           _bloc = AddTicketBloc(instance<TicketUserRepository>());
           _bloc?.add(AddTicketStarted());
           return _bloc!;
         },
-        child: SafeArea(
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Padding(
-              padding: padding36H,
-              child: BlocListener<AddTicketBloc, AddTicketState>(
-                listener: (context, state) async {
-                  if (state is AddTicketError) {
-                    context.showSnackBar(state.error.message);
-                  } else if (state is AddTicketCreated) {
-                    Navigator.pop(context);
-                    context.showSnackBar('تیکت با موفقیت ساخته شد');
-                  } else if (state is AddTicketSetNewType) {
-                    setNewType(state.value);
-                  }
-                },
-                listenWhen: (p, c) {
-                  return c is AddTicketError ||
-                      c is AddTicketCreated ||
-                      c is AddTicketSetNewType;
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    sizedBoxH24,
-                    const HomeAppBar(),
-                    sizedBoxH48,
-                    _largeText(themeData, 'ارسال تیکت جدید'),
-                    sizedBoxH32,
-                    _descriptionText(themeData, 'نوع درخواست:'),
-                    sizedBoxH12,
-                    DropDownTicketType(
-                      onTap: (value) {
-                        _bloc?.add(AddTicketChangeTypeState(value));
-                      },
-                    ),
-                    sizedBoxH24,
-                    _descriptionText(themeData, 'موضوع درخواست:'),
-                    sizedBoxH12,
-                    ElevatedTextField(
-                      keyboardType: TextInputType.text,
-                      hint: 'نوشتن موضوع درخواست...',
-                      isPassword: false,
-                      controller: _titleController,
-                    ),
-                    sizedBoxH24,
-                    _descriptionText(themeData, 'متن درخواست:'),
-                    sizedBoxH12,
-                    ElevatedTextField(
-                      keyboardType: TextInputType.text,
-                      hint: 'نوشتن متن درخواست...',
-                      isPassword: false,
-                      maxLines: 8,
-                      height: 150,
-                      controller: _descController,
-                    ),
-                    sizedBoxH24,
-                    _descriptionText(themeData, 'درج فایل'),
-                    sizedBoxH12,
-                    FileComponent(image: Assets.image.svg.file.svg()),
-                    sizedBoxH48,
-                    Center(
-                      child: BlocBuilder<AddTicketBloc, AddTicketState>(
-                        builder: (context, state) {
-                          return state is AddTicketLoading
-                              ? showLoading(themeData.colorScheme.primary)
-                              : GradiantButton(
-                                  gradient: LightColorPalette.defaultOkButton,
-                                  onTap: () {
-                                    _createTicket(context);
-                                  },
-                                  label: 'ارسال',
-                                  icon: Assets.image.svg.send.svg(width: 18),
-                                  textStyle: themeData.textTheme.button,
-                                  height: homeButtonSizeHeight,
-                                  width: homeButtonSizeWidth,
-                                  borderRadius: circular18,
-                                );
-                        },
-                      ),
-                    ),
-                    sizedBoxH32
-                  ],
-                ),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: padding36H,
+            child: BlocListener<AddTicketBloc, AddTicketState>(
+              listener: (context, state) async {
+                if (state is AddTicketError) {
+                  context.showSnackBar(state.error.message);
+                } else if (state is AddTicketCreated) {
+                  Navigator.pop(context);
+                  context.showSnackBar('تیکت با موفقیت ساخته شد');
+                } else if (state is AddTicketSetNewType) {
+                  setNewType(state.value);
+                }
+              },
+              listenWhen: (p, c) {
+                return c is AddTicketError ||
+                    c is AddTicketCreated ||
+                    c is AddTicketSetNewType;
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  sizedBoxH24,
+                  const HomeAppBar(),
+                  sizedBoxH48,
+                  _largeText(themeData, 'ارسال تیکت جدید'),
+                  sizedBoxH32,
+                  _descriptionText(themeData, 'نوع درخواست:'),
+                  sizedBoxH12,
+                  DropDownTicketType(
+                    onTap: (value) {
+                      _bloc?.add(AddTicketChangeTypeState(value));
+                    },
+                  ),
+                  sizedBoxH24,
+                  _descriptionText(themeData, 'موضوع درخواست:'),
+                  sizedBoxH12,
+                  ElevatedTextField(
+                    keyboardType: TextInputType.text,
+                    hint: 'نوشتن موضوع درخواست...',
+                    isPassword: false,
+                    controller: _titleController,
+                  ),
+                  sizedBoxH24,
+                  _descriptionText(themeData, 'متن درخواست:'),
+                  sizedBoxH12,
+                  ElevatedTextField(
+                    keyboardType: TextInputType.text,
+                    hint: 'نوشتن متن درخواست...',
+                    isPassword: false,
+                    maxLines: 8,
+                    height: 150,
+                    controller: _descController,
+                  ),
+                  sizedBoxH24,
+                  _descriptionText(themeData, 'درج فایل'),
+                  sizedBoxH12,
+                  FileComponent(image: Assets.image.svg.file.svg()),
+                  sizedBoxH48,
+                  BlocBuilder<AddTicketBloc, AddTicketState>(
+                    builder: (context, state) {
+                      return state is AddTicketLoading
+                          ? showLoading(themeData.colorScheme.primary)
+                          : GradiantButton(
+                              gradient: LightColorPalette.defaultOkButton,
+                              onTap: () {
+                                _createTicket(context);
+                              },
+                              label: 'ارسال',
+                              icon: Assets.image.svg.send.svg(width: 18),
+                              textStyle: themeData.textTheme.button,
+                              height: homeButtonSizeHeight,
+                              width: homeButtonSizeWidth,
+                              borderRadius: circular18,
+                            );
+                    },
+                  ),
+                  sizedBoxH32,
+                  const SizedBox(
+                    height: HomeRoute.bottomNavHeight -
+                        HomeRoute.bottomNavContainerHeight,
+                  ),
+                ],
               ),
             ),
           ),

@@ -11,6 +11,7 @@ import 'package:ticketban_mobile/presentation/component/widget/gradiant_button.d
 import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/bloc/change_password_bloc.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
+import 'package:ticketban_mobile/presentation/screen/home/home_route.dart';
 import 'package:ticketban_mobile/util/extension.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
@@ -40,116 +41,108 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: themeData.colorScheme.surface,
-      statusBarIconBrightness: Brightness.dark,
-    ));
 
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
-    return Scaffold(
-      backgroundColor: themeData.colorScheme.surfaceVariant,
-      body: SafeArea(
+    return HomeRoute(
+      child: BlocProvider<ChangePasswordBloc>(
+        create: (context) => ChangePasswordBloc(
+          instance<AuthRepository>(),
+        )..add(ChangePasswordStarted()),
         child: SingleChildScrollView(
-          child: BlocProvider<ChangePasswordBloc>(
-            create: (context) => ChangePasswordBloc(
-              instance<AuthRepository>(),
-            )..add(ChangePasswordStarted()),
-            child: Padding(
-              padding: padding36H,
-              child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
-                listenWhen: (p, c) =>
-                    c is ChangePasswordSuccess || c is ChangePasswordError,
-                listener: (context, state) {
-                  if (state is ChangePasswordSuccess) {
-                    passwordChanged(context, 'رمز عبور با موفقیت تغییر کرد');
-                  } else if (state is ChangePasswordError) {
-                    passwordNoChanged(context, state.error.message);
-                  }
-                },
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    sizedBoxH24,
-                    const HomeAppBar(),
-                    sizedBoxH48,
-                    _largeText(themeData, 'تغییر کلمه عبور'),
-                    sizedBoxH32,
-                    _descriptionText(themeData, 'کلمه عبور فعلی را وارد کنید:'),
-                    sizedBoxH12,
-                    CustomTextField(
-                      hint: 'کلمه عبور فعلی:',
-                      controller: _currentPassword,
-                      isPassword: true,
-                      prefixIcon: Padding(
-                        padding: paddingSuffixIcon,
-                        child: Assets.image.svg.passwordItem.svg(width: 24),
-                      ),
-                      suffixIcon: _endPasswordIcon(themeData),
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: padding36H,
+            child: BlocListener<ChangePasswordBloc, ChangePasswordState>(
+              listenWhen: (p, c) =>
+                  c is ChangePasswordSuccess || c is ChangePasswordError,
+              listener: (context, state) {
+                if (state is ChangePasswordSuccess) {
+                  passwordChanged(context, 'رمز عبور با موفقیت تغییر کرد');
+                } else if (state is ChangePasswordError) {
+                  passwordNoChanged(context, state.error.message);
+                }
+              },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  sizedBoxH24,
+                  const HomeAppBar(),
+                  sizedBoxH48,
+                  _largeText(themeData, 'تغییر کلمه عبور'),
+                  sizedBoxH32,
+                  _descriptionText(themeData, 'کلمه عبور فعلی را وارد کنید:'),
+                  sizedBoxH12,
+                  CustomTextField(
+                    hint: 'کلمه عبور فعلی:',
+                    controller: _currentPassword,
+                    isPassword: true,
+                    prefixIcon: Padding(
+                      padding: paddingSuffixIcon,
+                      child: Assets.image.svg.passwordItem.svg(width: 24),
                     ),
-                    sizedBoxH24,
-                    _descriptionText(themeData, 'کلمه عبور جدید را وارد کنید:'),
-                    sizedBoxH12,
-                    CustomTextField(
-                      hint: 'کلمه عبور جدید:',
-                      controller: _newPassword,
-                      prefixIcon: Padding(
-                        padding: paddingSuffixIcon,
-                        child: Assets.image.svg.lock.svg(width: 24),
-                      ),
-                      isPassword: true,
-                      suffixIcon: _endPasswordIcon(themeData),
+                    suffixIcon: _endPasswordIcon(themeData),
+                  ),
+                  sizedBoxH24,
+                  _descriptionText(themeData, 'کلمه عبور جدید را وارد کنید:'),
+                  sizedBoxH12,
+                  CustomTextField(
+                    hint: 'کلمه عبور جدید:',
+                    controller: _newPassword,
+                    prefixIcon: Padding(
+                      padding: paddingSuffixIcon,
+                      child: Assets.image.svg.lock.svg(width: 24),
                     ),
-                    sizedBoxH24,
-                    _descriptionText(
-                      themeData,
-                      'کلمه عبور جدید را مجددا وارد کنید:',
+                    isPassword: true,
+                    suffixIcon: _endPasswordIcon(themeData),
+                  ),
+                  sizedBoxH24,
+                  _descriptionText(
+                    themeData,
+                    'کلمه عبور جدید را مجددا وارد کنید:',
+                  ),
+                  sizedBoxH12,
+                  CustomTextField(
+                    hint: 'تایید کلمه عبور جدید:',
+                    controller: _confirmNewPassword,
+                    prefixIcon: Padding(
+                      padding: paddingSuffixIcon,
+                      child: Assets.image.svg.lock.svg(width: 24),
                     ),
-                    sizedBoxH12,
-                    CustomTextField(
-                      hint: 'تایید کلمه عبور جدید:',
-                      controller: _confirmNewPassword,
-                      prefixIcon: Padding(
-                        padding: paddingSuffixIcon,
-                        child: Assets.image.svg.lock.svg(width: 24),
-                      ),
-                      isPassword: true,
-                      suffixIcon: _endPasswordIcon(themeData),
-                    ),
-                    sizedBoxH36,
-                    BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
-                      buildWhen: (p, c) =>
-                          c is ChangePasswordLoading ||
-                          c is ChangePasswordError,
-                      builder: (context, state) {
-                        return state is ChangePasswordLoading
-                            ? showLoading(themeData.colorScheme.primary)
-                            : GradiantButton(
-                                gradient: LightColorPalette.defaultOkButton,
-                                onTap: () {
-                                  context.read<ChangePasswordBloc>().add(
-                                        ChangePasswordClickSubmitButton(
-                                          currentPass: _currentPassword.text,
-                                          newPass: _newPassword.text,
-                                          confirmNewPass:
-                                              _confirmNewPassword.text,
-                                        ),
-                                      );
-                                },
-                                label: 'تایید',
-                                icon: Assets.image.svg.check.svg(width: 20),
-                                textStyle: themeData.textTheme.button,
-                                height: homeButtonSizeHeight,
-                                width: homeButtonSizeWidth,
-                                borderRadius: circular18,
-                              );
-                      },
-                    )
-                  ],
-                ),
+                    isPassword: true,
+                    suffixIcon: _endPasswordIcon(themeData),
+                  ),
+                  sizedBoxH36,
+                  BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
+                    buildWhen: (p, c) =>
+                        c is ChangePasswordLoading || c is ChangePasswordError,
+                    builder: (context, state) {
+                      return state is ChangePasswordLoading
+                          ? showLoading(themeData.colorScheme.primary)
+                          : GradiantButton(
+                              gradient: LightColorPalette.defaultOkButton,
+                              onTap: () {
+                                context.read<ChangePasswordBloc>().add(
+                                      ChangePasswordClickSubmitButton(
+                                        currentPass: _currentPassword.text,
+                                        newPass: _newPassword.text,
+                                        confirmNewPass:
+                                            _confirmNewPassword.text,
+                                      ),
+                                    );
+                              },
+                              label: 'تایید',
+                              icon: Assets.image.svg.check.svg(width: 20),
+                              textStyle: themeData.textTheme.button,
+                              height: homeButtonSizeHeight,
+                              width: homeButtonSizeWidth,
+                              borderRadius: circular18,
+                            );
+                    },
+                  ),
+                  const SizedBox(
+                    height: HomeRoute.bottomNavHeight -
+                        HomeRoute.bottomNavContainerHeight,
+                  ),
+                ],
               ),
             ),
           ),
