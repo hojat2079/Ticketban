@@ -56,8 +56,10 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                   c is ChangePasswordSuccess || c is ChangePasswordError,
               listener: (context, state) {
                 if (state is ChangePasswordSuccess) {
+                  //after success password changed
                   passwordChanged(context, 'رمز عبور با موفقیت تغییر کرد');
                 } else if (state is ChangePasswordError) {
+                  //after emit error state
                   passwordNoChanged(context, state.error.message);
                 }
               },
@@ -65,12 +67,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   sizedBoxH24,
+
+                  //appBar
                   const HomeAppBar(),
+
                   sizedBoxH48,
+
+                  //titleText
                   _largeText(themeData, 'تغییر کلمه عبور'),
+
                   sizedBoxH32,
+
+                  //hint currentPassword
                   _descriptionText(themeData, 'کلمه عبور فعلی را وارد کنید:'),
+
                   sizedBoxH12,
+
+                  //currentPassword TextField
                   CustomTextField(
                     hint: 'کلمه عبور فعلی:',
                     controller: _currentPassword,
@@ -81,53 +94,58 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                     ),
                     suffixIcon: _endPasswordIcon(themeData),
                   ),
+
                   sizedBoxH24,
+
+                  //hint newPassword
                   _descriptionText(themeData, 'کلمه عبور جدید را وارد کنید:'),
+
                   sizedBoxH12,
+
+                  //newPassword TextField
                   CustomTextField(
                     hint: 'کلمه عبور جدید:',
                     controller: _newPassword,
-                    prefixIcon: Padding(
-                      padding: paddingSuffixIcon,
-                      child: Assets.image.svg.lock.svg(width: 24),
-                    ),
+                    prefixIcon: _prefixIconNewPassword(),
                     isPassword: true,
                     suffixIcon: _endPasswordIcon(themeData),
                   ),
                   sizedBoxH24,
+
+                  //hint confirmCurrentPassword
                   _descriptionText(
                     themeData,
                     'کلمه عبور جدید را مجددا وارد کنید:',
                   ),
+
                   sizedBoxH12,
+
+                  //confirmNewPassword TextField
                   CustomTextField(
                     hint: 'تایید کلمه عبور جدید:',
                     controller: _confirmNewPassword,
-                    prefixIcon: Padding(
-                      padding: paddingSuffixIcon,
-                      child: Assets.image.svg.lock.svg(width: 24),
-                    ),
+                    prefixIcon: _prefixIconNewPassword(),
                     isPassword: true,
                     suffixIcon: _endPasswordIcon(themeData),
                   ),
+
                   sizedBoxH36,
+
+                  //submit button and loading when request to api
                   BlocBuilder<ChangePasswordBloc, ChangePasswordState>(
                     buildWhen: (p, c) =>
                         c is ChangePasswordLoading || c is ChangePasswordError,
                     builder: (context, state) {
                       return state is ChangePasswordLoading
-                          ? showLoading(themeData.colorScheme.primary)
-                          : GradiantButton(
+                          ?
+                          //show Loading when request to server
+                          showLoading(themeData.colorScheme.primary)
+                          :
+                          //submit button for changePassword
+                          GradiantButton(
                               gradient: LightColorPalette.defaultOkButton,
                               onTap: () {
-                                context.read<ChangePasswordBloc>().add(
-                                      ChangePasswordClickSubmitButton(
-                                        currentPass: _currentPassword.text,
-                                        newPass: _newPassword.text,
-                                        confirmNewPass:
-                                            _confirmNewPassword.text,
-                                      ),
-                                    );
+                                _submitButtonClicked(context);
                               },
                               label: 'تایید',
                               icon: Assets.image.svg.check.svg(width: 20),
@@ -138,6 +156,8 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                             );
                     },
                   ),
+
+                  //for space with bottomNav
                   const SizedBox(
                     height: HomeRoute.bottomNavHeight -
                         HomeRoute.bottomNavContainerHeight,
@@ -148,6 +168,23 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _submitButtonClicked(BuildContext context) {
+    context.read<ChangePasswordBloc>().add(
+          ChangePasswordClickSubmitButton(
+            currentPass: _currentPassword.text,
+            newPass: _newPassword.text,
+            confirmNewPass: _confirmNewPassword.text,
+          ),
+        );
+  }
+
+  Widget _prefixIconNewPassword() {
+    return Padding(
+      padding: paddingSuffixIcon,
+      child: Assets.image.svg.lock.svg(width: 24),
     );
   }
 

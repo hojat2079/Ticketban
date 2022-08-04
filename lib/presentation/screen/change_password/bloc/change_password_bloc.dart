@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketban_mobile/data/remote/util/server_error.dart';
 import 'package:ticketban_mobile/domain/repository/auth_repository.dart';
 
@@ -57,6 +57,7 @@ class ChangePasswordBloc
         return;
       }
 
+      //success state
       emit(ChangePasswordSuccess());
     } catch (ex) {
       emit(
