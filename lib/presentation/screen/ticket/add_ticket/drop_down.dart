@@ -6,13 +6,13 @@ import 'package:ticketban_mobile/presentation/component/dimension.dart';
 
 class DropDownTicketType extends StatelessWidget {
   // List of items in our dropdown menu
-  final List<String> _items = [
+  static const List<String> items = [
     'تعیین نوع درخواست...',
     'مالی',
     'عمومی',
     'اداری',
   ];
-  final Map<String, Color> _colorItems = {
+  static const Map<String, Color> colorItems = {
     'تعیین نوع درخواست...': LightColorPalette.blackTextColor,
     'مالی': LightColorPalette.yellowDropDown,
     'عمومی': LightColorPalette.greenDropDown,
@@ -21,7 +21,7 @@ class DropDownTicketType extends StatelessWidget {
 
   final Function(String) onTap;
 
-  DropDownTicketType({Key? key, required this.onTap}) : super(key: key);
+  const DropDownTicketType({Key? key, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,18 +68,18 @@ class DropDownTicketType extends StatelessWidget {
             right: 8,
             left: 16,
           ),
-          hintText: _items[0],
+          hintText: items[0],
           hintStyle: themeData.textTheme.bodyText2!.apply(
             color: themeData.colorScheme.onSurface.withOpacity(0.7),
           ),
         ),
-        items: _items
+        items: items
             .map(
               (String item) => DropdownMenuItem(
                 alignment: Alignment.centerRight,
-                enabled: _items.first == item ? false : true,
+                enabled: items.first == item ? false : true,
                 value: item,
-                child: _items.first == item
+                child: items.first == item
                     ? Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -118,7 +118,7 @@ class DropDownTicketType extends StatelessWidget {
                           item,
                           style: themeData.textTheme.subtitle2!.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: _colorItems[item],
+                            color: colorItems[item],
                             fontSize: 16,
                           ),
                         ),

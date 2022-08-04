@@ -30,7 +30,7 @@ class CustomToggleButtonSelected extends StatelessWidget {
           borderRadius: circular10,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               text,
@@ -40,6 +40,7 @@ class CustomToggleButtonSelected extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
+            sizedBoxW8,
             BadgeWidget(
               number: number,
             )

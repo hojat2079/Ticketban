@@ -87,7 +87,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
     validateResponse(response);
     final List<TicketUserDto> list = [];
     for (var object in (response.data['data']['arr'] as List)) {
-      list.add(TicketUserDto.fromJson(object));
+      list.add(TicketUserDto.fromJson(object[0]));
     }
     return list;
   }
