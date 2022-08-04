@@ -9,6 +9,7 @@ import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
+import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
@@ -45,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final Size size = MediaQuery.of(context).size;
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.surfaceVariant,
@@ -71,73 +73,83 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: SafeArea(
           child: SingleChildScrollView(
-            child: Padding(
-              padding: padding36H,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  sizedBoxH24,
-                  const HomeAppBar(),
-                  sizedBoxH24,
-                  const AvatarWidget(),
-                  sizedBoxH12,
-                  BlocBuilder<HomeBloc, HomeState>(
-                    builder: (context, state) {
-                      return Text(
-                        state is HomeSuccess
-                            ? state.username
-                            : state is HomeBackExit
-                                ? state.username
-                                : '',
-                        style: themeData.textTheme.headline3,
+            child: BlocBuilder<HomeBloc, HomeState>(
+              buildWhen: (p, c) => c is HomeSuccess || c is HomeLoading,
+              builder: (context, state) {
+                return state is HomeLoading
+                    ? SizedBox(
+                        width: size.width,
+                        height: size.height,
+                        child: Center(
+                          child: showLoading(
+                            themeData.colorScheme.primary,
+                          ),
+                        ),
+                      )
+                    : Padding(
+                        padding: padding36H,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            sizedBoxH24,
+                            const HomeAppBar(),
+                            sizedBoxH24,
+                            const AvatarWidget(),
+                            sizedBoxH12,
+                            Text(
+                              state is HomeSuccess ? state.username : '',
+                              style: themeData.textTheme.headline3,
+                            ),
+                            sizedBoxH36,
+                            CustomMenuItem(
+                              icon: Assets.image.svg.myTicket.svg(),
+                              text: Text(
+                                HomeScreen.item1,
+                                style: themeData.textTheme.subtitle1,
+                              ),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ListTicketScreen.route);
+                              },
+                            ),
+                            sizedBoxH20,
+                            CustomMenuItem(
+                              icon: Assets.image.svg.allTicket.svg(),
+                              text: Text(HomeScreen.item2,
+                                  style: themeData.textTheme.subtitle1),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, AddNewTicketScreen.route);
+                              },
+                            ),
+                            sizedBoxH20,
+                            CustomMenuItem(
+                              icon: Assets.image.svg.passwordItem.svg(),
+                              text: Text(HomeScreen.item3,
+                                  style: themeData.textTheme.subtitle1),
+                              onTap: () {
+                                Navigator.pushNamed(
+                                    context, ChangePasswordScreen.route);
+                              },
+                            ),
+                            sizedBoxH20,
+                            CustomMenuItem(
+                              icon: Assets.image.svg.exit.svg(),
+                              text: Text(HomeScreen.item4,
+                                  style: themeData.textTheme.subtitle1),
+                              onTap: () async {
+                                await showCustomDialog(
+                                  context: context,
+                                  title: 'آیا از خروج خود اطمینان دارید؟',
+                                  themeData: themeData,
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       );
-                    },
-                  ),
-                  sizedBoxH36,
-                  CustomMenuItem(
-                    icon: Assets.image.svg.myTicket.svg(),
-                    text: Text(
-                      HomeScreen.item1,
-                      style: themeData.textTheme.subtitle1,
-                    ),
-                    onTap: () {
-                      Navigator.pushNamed(context, ListTicketScreen.route);
-                    },
-                  ),
-                  sizedBoxH20,
-                  CustomMenuItem(
-                    icon: Assets.image.svg.allTicket.svg(),
-                    text: Text(HomeScreen.item2,
-                        style: themeData.textTheme.subtitle1),
-                    onTap: () {
-                      Navigator.pushNamed(context, AddNewTicketScreen.route);
-                    },
-                  ),
-                  sizedBoxH20,
-                  CustomMenuItem(
-                    icon: Assets.image.svg.passwordItem.svg(),
-                    text: Text(HomeScreen.item3,
-                        style: themeData.textTheme.subtitle1),
-                    onTap: () {
-                      Navigator.pushNamed(context, ChangePasswordScreen.route);
-                    },
-                  ),
-                  sizedBoxH20,
-                  CustomMenuItem(
-                    icon: Assets.image.svg.exit.svg(),
-                    text: Text(HomeScreen.item4,
-                        style: themeData.textTheme.subtitle1),
-                    onTap: () async {
-                      await showCustomDialog(
-                        context: context,
-                        title: 'آیا از خروج خود اطمینان دارید؟',
-                        themeData: themeData,
-                      );
-                    },
-                  ),
-                ],
-              ),
+              },
             ),
           ),
         ),
@@ -158,12 +170,10 @@ class _HomeScreenState extends State<HomeScreen> {
           value: _bloc!,
           child: BlocListener<HomeBloc, HomeState>(
             listenWhen: (p, c) {
-              return c is HomeExitSuccess || c is HomeBackExit;
+              return c is HomeExitSuccess;
             },
             listener: (context, state) {
-              if (state is HomeBackExit) {
-                Navigator.pop(context);
-              } else if (state is HomeExitSuccess) {
+              if (state is HomeExitSuccess) {
                 Navigator.pushNamedAndRemoveUntil(
                     context, LoginScreen.route, (route) => false);
               }
@@ -201,7 +211,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   actions: [
                     ElevatedButton(
                       onPressed: () {
-                        _bloc?.add(const HomeExitButtonClicked(true));
+                        _bloc?.add(const HomeExitButtonClicked());
                       },
                       style: ElevatedButton.styleFrom(
                         primary: LightColorPalette.green,
@@ -217,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox.shrink(),
                     ElevatedButton(
                       onPressed: () {
-                        _bloc?.add(const HomeExitButtonClicked(false));
+                        Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
                         primary: LightColorPalette.red,

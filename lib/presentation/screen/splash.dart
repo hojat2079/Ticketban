@@ -63,8 +63,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 gradient: LightColorPalette.defaultTextGradiant,
                 style: themeData.textTheme.headline3,
               ),
-              sizedBoxH32,
-              showLoading(themeData.colorScheme.primary)
             ],
           ),
         ),

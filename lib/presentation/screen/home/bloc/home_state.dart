@@ -4,7 +4,7 @@ abstract class HomeState extends Equatable {
   const HomeState();
 }
 
-class HomeInitial extends HomeState {
+class HomeLoading extends HomeState {
   @override
   List<Object> get props => [];
 }
@@ -21,13 +21,4 @@ class HomeSuccess extends HomeState {
 class HomeExitSuccess extends HomeState {
   @override
   List<Object?> get props => [];
-}
-
-class HomeBackExit extends HomeState {
-  final String username;
-
-  const HomeBackExit(this.username);
-
-  @override
-  List<Object?> get props => [username];
 }

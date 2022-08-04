@@ -15,22 +15,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   late String name;
 
   HomeBloc(this.ticketUserRepository, this.authRepository)
-      : super(HomeInitial()) {
+      : super(HomeLoading()) {
     on<HomeEvent>((event, emit) async {
       if (event is HomeStarted) {
         await emitHomeStartedState(emit);
       } else if (event is HomeExitButtonClicked) {
-        if (event.exit) {
-          await emitExitState(emit);
-        } else {
-          emit(HomeBackExit(name));
-        }
+        await emitExitState(emit);
       }
     });
   }
 
   Future<void> emitHomeStartedState(Emitter<HomeState> emit) async {
     UserInfoResponse info;
+    emit(HomeLoading());
     if (TokenContainer.instance().userId != null) {
       final String userId = TokenContainer.instance().userId!;
       info = await ticketUserRepository.userInfo(userId);
