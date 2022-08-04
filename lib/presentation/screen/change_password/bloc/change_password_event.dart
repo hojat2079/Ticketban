@@ -14,11 +14,11 @@ class ChangePasswordClickSubmitButton extends ChangePasswordEvent {
   final String newPass;
   final String confirmNewPass;
 
-  const ChangePasswordClickSubmitButton(
-    this.currentPass,
-    this.newPass,
-    this.confirmNewPass,
-  );
+  const ChangePasswordClickSubmitButton({
+    required this.currentPass,
+    required this.newPass,
+    required this.confirmNewPass,
+  });
 
   @override
   List<Object> get props => [currentPass, newPass, confirmNewPass];
