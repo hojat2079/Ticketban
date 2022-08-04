@@ -29,6 +29,7 @@ class ListTicketSuccess extends ListTicketState {
         sizeAllTickets,
         sizeAnsweredTickets,
         sizePendingTickets,
+        selectedIndexToggleMenu,
       ];
 }
 
