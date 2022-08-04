@@ -10,7 +10,7 @@ class HomeRoute extends StatelessWidget {
   static const double bottomNavContainerHeight = 70;
   static const double _bottomNavIconSize = 65;
   static const BorderRadius _bottomNavIconBorderRadius =
-      BorderRadius.all(Radius.circular(30));
+      BorderRadius.all(Radius.circular(25));
   static const BorderRadius _bottomNavBorderRadius = BorderRadius.vertical(
     top: Radius.circular(25),
   );
@@ -63,9 +63,19 @@ class HomeRoute extends StatelessWidget {
                       child: Center(
                         child: Column(
                           children: [
-                            _iconBottomNav(color2, color1),
+                            _iconBottomNav(
+                              color1: color1,
+                              color2: color2,
+                              onTap: () {
+                                backHomeAction(context);
+                              },
+                            ),
                             sizedBoxH8,
-                            _textBottomNav(themeData, colorText)
+                            _textBottomNav(
+                              themeData: themeData,
+                              colorText: colorText,
+                              text: 'Home',
+                            )
                           ],
                         ),
                       ),
@@ -80,7 +90,7 @@ class HomeRoute extends StatelessWidget {
     );
   }
 
-  Container _containerBottomNav(ThemeData themeData) {
+  Widget _containerBottomNav(ThemeData themeData) {
     return Container(
       height: bottomNavContainerHeight,
       decoration: BoxDecoration(
@@ -96,9 +106,13 @@ class HomeRoute extends StatelessWidget {
     );
   }
 
-  Text _textBottomNav(ThemeData themeData, Color colorText) {
+  Widget _textBottomNav({
+    required ThemeData themeData,
+    required Color colorText,
+    required String text,
+  }) {
     return Text(
-      'Home',
+      text,
       style: themeData.textTheme.bodyText1!.copyWith(
         color: colorText,
         fontWeight: FontWeight.w400,
@@ -106,33 +120,44 @@ class HomeRoute extends StatelessWidget {
     );
   }
 
-  Container _iconBottomNav(Color color2, Color color1) {
-    return Container(
-      height: _bottomNavIconSize,
-      width: _bottomNavIconSize,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        borderRadius: _bottomNavIconBorderRadius,
-        boxShadow: [
-          BoxShadow(
-            color: color2.withOpacity(0.6),
-            blurRadius: 10,
-          )
-        ],
-        gradient: LinearGradient(
-          colors: [
-            color1,
-            color2,
+  Widget _iconBottomNav({
+    required Color color2,
+    required Color color1,
+    required Function() onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: _bottomNavIconSize,
+        width: _bottomNavIconSize,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: _bottomNavIconBorderRadius,
+          boxShadow: [
+            BoxShadow(
+              color: color2.withOpacity(0.6),
+              blurRadius: 10,
+            )
           ],
-          stops: const [
-            0.0,
-            0.8,
-          ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
+          gradient: LinearGradient(
+            colors: [
+              color1,
+              color2,
+            ],
+            stops: const [
+              0.0,
+              0.8,
+            ],
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
+          ),
         ),
+        child: Assets.image.svg.home.svg(),
       ),
-      child: Assets.image.svg.home.svg(),
     );
+  }
+
+  void backHomeAction(BuildContext context) {
+    Navigator.pop(context);
   }
 }
