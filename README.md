@@ -1,4 +1,4 @@
-# reminder_app
+# Ticketban
 
 ## Description
 
