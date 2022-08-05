@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
-import 'package:ticketban_mobile/presentation/screen/list_ticket/toggle_group/badge_widget.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/toggle_group/badge_widget.dart';
 
 class CustomToggleButtonSelected extends StatelessWidget {
   final String text;
@@ -30,7 +30,7 @@ class CustomToggleButtonSelected extends StatelessWidget {
           borderRadius: circular10,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               text,
@@ -40,6 +40,7 @@ class CustomToggleButtonSelected extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
+            sizedBoxW8,
             BadgeWidget(
               number: number,
             )

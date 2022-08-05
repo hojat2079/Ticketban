@@ -12,13 +12,18 @@ class HomeAppBar extends StatelessWidget {
     final themeData = Theme.of(context);
     return Row(
       children: [
+        //logo
         Assets.image.svg.logo.svg(width: 44),
+
         sizedBoxW12,
+
+        //title
         GradientText(
           'تیکت بان',
           gradient: LightColorPalette.defaultTextGradiant,
           style: themeData.textTheme.headline5,
         ),
+
         const Spacer(),
       ],
     );

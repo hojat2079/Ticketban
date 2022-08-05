@@ -22,6 +22,7 @@ class AvatarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Container(
+      //outer gradiant border
       width: width,
       height: height,
       padding: const EdgeInsets.all(defaultBorderSizeOuterGradiantAvatar),
@@ -30,18 +31,21 @@ class AvatarWidget extends StatelessWidget {
         gradient: outerGradiant,
       ),
       child: Container(
+        //white container for padding
         padding: padding12,
         decoration: BoxDecoration(
           color: themeData.colorScheme.surfaceVariant,
           shape: BoxShape.circle,
         ),
         child: Container(
+          //inner gradiant border
           padding: const EdgeInsets.all(defaultBorderSizeInnerGradiantAvatar),
           decoration: BoxDecoration(
             gradient: innerGradiant,
             shape: BoxShape.circle,
           ),
           child: Container(
+            //white container for padding
             padding: padding12,
             decoration: BoxDecoration(
               color: themeData.colorScheme.surfaceVariant,

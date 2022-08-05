@@ -1,16 +1,37 @@
-# ticketban_mobile
+# Ticketban
 
-A new Flutter project.
+## Description
 
-## Getting Started
+This is a Ticketing-System application implemented with Flutter where developed by using Bloc library in clean architecture with Dependency injection.
 
-This project is a starting point for a Flutter application.
+## Project Setup
 
-A few resources to get you started if this is your first Flutter project:
+1. clone and run
+   Repository [https://github.com/negarmiralaie/ticketing-website](https://github.com/negarmiralaie/ticketing-website)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2. After that run this command
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```bash
+flutter run
+```
+
+## Packages:
+
+- bloc
+- get_it
+- dio
+- shared_preferences
+- equatable
+- flutter_svg
+
+## ScreenShots
+
+<div>
+  <img src="/screenshots/1.png" width="200" style="margin-right:100px"/>
+  <img src="/screenshots/2.png" width="200"/>
+  <img src="/screenshots/3.png" width="200"/>
+  <img src="/screenshots/4.png" width="200"/>
+  <img src="/screenshots/5.png" width="200"/>
+  <img src="/screenshots/6.png" width="200"/>
+  <img src="/screenshots/7.png" width="200"/>
+ </div>

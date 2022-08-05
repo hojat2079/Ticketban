@@ -64,3 +64,8 @@ class AuthOtpClicked extends AuthEvent {
   @override
   List<Object> get props => [otp];
 }
+
+class AuthAfterOneSecond extends AuthEvent {
+  @override
+  List<Object> get props => [];
+}

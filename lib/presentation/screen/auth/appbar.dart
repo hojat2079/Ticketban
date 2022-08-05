@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/color.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
@@ -29,21 +28,27 @@ class AppBarAuth extends StatelessWidget {
       ),
       child: Row(
         children: [
+          //logo
           Assets.image.svg.logo.svg(),
+
           sizedBoxW8,
+
+          //appbar title
           GradientText(
             'تیکت بان',
             gradient: LightColorPalette.defaultTextGradiant,
             style: themeData.textTheme.headline5,
           ),
+
           const Spacer(),
+
+          //appbar action
           GradiantButton(
             label: text,
             onTap: onTap,
             gradient: gradient,
             textStyle: themeData.textTheme.button,
           ),
-          //gradiant button
         ],
       ),
     );

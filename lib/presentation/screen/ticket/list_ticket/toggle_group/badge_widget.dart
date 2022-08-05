@@ -10,8 +10,8 @@ class BadgeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     return Container(
-      width: 16,
-      height: 16,
+      width: 18,
+      height: 18,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -21,7 +21,7 @@ class BadgeWidget extends StatelessWidget {
         number.toFaNumber(),
         style: themeData.textTheme.caption!.copyWith(
           color: Colors.black,
-          fontSize: 8,
+          fontSize: 10,
         ),
       ),
     );
