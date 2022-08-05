@@ -18,8 +18,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : super(HomeLoading()) {
     on<HomeEvent>((event, emit) async {
       if (event is HomeStarted) {
+        //start home page
         await emitHomeStartedState(emit);
       } else if (event is HomeExitButtonClicked) {
+        //click exit item
         await emitExitState(emit);
       }
     });
@@ -27,7 +29,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<void> emitHomeStartedState(Emitter<HomeState> emit) async {
     UserInfoResponse info;
+
+    //show loading state
     emit(HomeLoading());
+
+    //request for get name
     if (TokenContainer.instance().userId != null) {
       final String userId = TokenContainer.instance().userId!;
       info = await ticketUserRepository.userInfo(userId);
@@ -35,6 +41,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       info = const UserInfoResponse('کاربر', 'مهمان');
     }
     name = info.toString();
+
+    //show success state and show name in head page
     emit(HomeSuccess(name));
   }
 

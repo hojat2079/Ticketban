@@ -24,11 +24,13 @@ class HomeRoute extends StatelessWidget {
     const Color color2 = Color(0xff6914CD);
     const Color colorText = Color(0xff6448D0);
 
+    //change status bar color
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.surface,
       statusBarIconBrightness: Brightness.dark,
     ));
 
+    //handle only portrait Screen
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -97,12 +99,16 @@ class HomeRoute extends StatelessWidget {
         color: themeData.colorScheme.surfaceVariant,
         borderRadius: _bottomNavBorderRadius,
         boxShadow: [
-          BoxShadow(
-            color: themeData.colorScheme.inverseSurface.withOpacity(0.2),
-            blurRadius: _bottomNavBlur,
-          ),
+          _containerShadow(themeData),
         ],
       ),
+    );
+  }
+
+  BoxShadow _containerShadow(ThemeData themeData) {
+    return BoxShadow(
+      color: themeData.colorScheme.inverseSurface.withOpacity(0.2),
+      blurRadius: _bottomNavBlur,
     );
   }
 
@@ -133,27 +139,33 @@ class HomeRoute extends StatelessWidget {
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: _bottomNavIconBorderRadius,
-          boxShadow: [
-            BoxShadow(
-              color: color2.withOpacity(0.6),
-              blurRadius: 10,
-            )
-          ],
-          gradient: LinearGradient(
-            colors: [
-              color1,
-              color2,
-            ],
-            stops: const [
-              0.0,
-              0.8,
-            ],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          ),
+          boxShadow: [_iconShadow(color2)],
+          gradient: _iconGradiant(color1, color2),
         ),
         child: Assets.image.svg.home.svg(),
       ),
+    );
+  }
+
+  BoxShadow _iconShadow(Color color2) {
+    return BoxShadow(
+      color: color2.withOpacity(0.6),
+      blurRadius: 10,
+    );
+  }
+
+  Gradient _iconGradiant(Color color1, Color color2) {
+    return LinearGradient(
+      colors: [
+        color1,
+        color2,
+      ],
+      stops: const [
+        0.0,
+        0.8,
+      ],
+      begin: Alignment.centerLeft,
+      end: Alignment.centerRight,
     );
   }
 

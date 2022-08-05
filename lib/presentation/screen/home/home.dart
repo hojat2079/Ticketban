@@ -14,6 +14,7 @@ import 'package:ticketban_mobile/presentation/screen/auth/login_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/change_password/change_password.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/avatar.dart';
+import 'package:ticketban_mobile/presentation/screen/home/exit_dialog.dart';
 import 'package:ticketban_mobile/presentation/screen/home/menu_item.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/add_ticket/add_ticket_screen.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/list_ticket_screen.dart';
@@ -48,11 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
     final ThemeData themeData = Theme.of(context);
     final Size size = MediaQuery.of(context).size;
 
+    //change status bar color
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.surfaceVariant,
       statusBarIconBrightness: Brightness.dark,
     ));
 
+    //handle only portrait Screen
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -77,72 +80,82 @@ class _HomeScreenState extends State<HomeScreen> {
               buildWhen: (p, c) => c is HomeSuccess || c is HomeLoading,
               builder: (context, state) {
                 return state is HomeLoading
-                    ? SizedBox(
-                        width: size.width,
-                        height: size.height,
-                        child: Center(
-                          child: showLoading(
-                            themeData.colorScheme.primary,
-                          ),
-                        ),
-                      )
-                    : Padding(
+                    ?
+                    //show loading
+                    _loading(size, themeData)
+                    :
+                    //content
+                    Padding(
                         padding: padding36H,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             sizedBoxH24,
+
+                            //appbar
+
                             const HomeAppBar(),
+
                             sizedBoxH24,
+
+                            //appbar
                             const AvatarWidget(),
+
                             sizedBoxH12,
-                            Text(
+
+                            //name text
+                            _nameText(
+                              themeData,
                               state is HomeSuccess ? state.username : '',
-                              style: themeData.textTheme.headline3,
                             ),
+
                             sizedBoxH36,
+
+                            //item list ticket
                             CustomMenuItem(
                               icon: Assets.image.svg.myTicket.svg(),
-                              text: Text(
-                                HomeScreen.item1,
-                                style: themeData.textTheme.subtitle1,
-                              ),
+                              text: _menuItemText(themeData, HomeScreen.item1),
                               onTap: () {
                                 Navigator.pushNamed(
                                     context, ListTicketScreen.route);
                               },
                             ),
+
                             sizedBoxH20,
+
+                            //item create ticket
                             CustomMenuItem(
                               icon: Assets.image.svg.allTicket.svg(),
-                              text: Text(HomeScreen.item2,
-                                  style: themeData.textTheme.subtitle1),
+                              text: _menuItemText(themeData, HomeScreen.item2),
                               onTap: () {
                                 Navigator.pushNamed(
                                     context, AddNewTicketScreen.route);
                               },
                             ),
+
                             sizedBoxH20,
+
+                            //item change password
                             CustomMenuItem(
                               icon: Assets.image.svg.passwordItem.svg(),
-                              text: Text(HomeScreen.item3,
-                                  style: themeData.textTheme.subtitle1),
+                              text: _menuItemText(themeData, HomeScreen.item3),
                               onTap: () {
                                 Navigator.pushNamed(
                                     context, ChangePasswordScreen.route);
                               },
                             ),
+
                             sizedBoxH20,
+
+                            //item exit
                             CustomMenuItem(
                               icon: Assets.image.svg.exit.svg(),
-                              text: Text(HomeScreen.item4,
-                                  style: themeData.textTheme.subtitle1),
+                              text: _menuItemText(themeData, HomeScreen.item4),
                               onTap: () async {
                                 await showCustomDialog(
                                   context: context,
                                   title: 'آیا از خروج خود اطمینان دارید؟',
-                                  themeData: themeData,
                                 );
                               },
                             ),
@@ -157,10 +170,35 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Text _menuItemText(ThemeData themeData, String text) {
+    return Text(
+      text,
+      style: themeData.textTheme.subtitle1,
+    );
+  }
+
+  Widget _nameText(ThemeData themeData, String text) {
+    return Text(
+      text,
+      style: themeData.textTheme.headline3,
+    );
+  }
+
+  Widget _loading(Size size, ThemeData themeData) {
+    return SizedBox(
+      width: size.width,
+      height: size.height,
+      child: Center(
+        child: showLoading(
+          themeData.colorScheme.primary,
+        ),
+      ),
+    );
+  }
+
   showCustomDialog({
     required BuildContext context,
     required String title,
-    required ThemeData themeData,
   }) async {
     await showDialog(
       context: context,
@@ -174,73 +212,17 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             listener: (context, state) {
               if (state is HomeExitSuccess) {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, LoginScreen.route, (route) => false);
+                _backToHome(context);
               }
             },
+            //for rtl layout
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: BackdropFilter(
+                //for blur behind screen
                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: AlertDialog(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: circular28,
-                  ),
-                  alignment: Alignment.center,
-                  actionsAlignment: MainAxisAlignment.center,
-                  titlePadding: const EdgeInsets.only(
-                    top: 24,
-                    bottom: 0,
-                    right: 16,
-                    left: 16,
-                  ),
-                  actionsPadding: const EdgeInsets.only(
-                    top: 20,
-                    bottom: 8,
-                    right: 16,
-                    left: 16,
-                  ),
-                  title: Center(
-                    child: Text(
-                      title,
-                      style: themeData.textTheme.headline6!.apply(
-                        color: const Color(0xff3A3A3A),
-                      ),
-                    ),
-                  ),
-                  actions: [
-                    ElevatedButton(
-                      onPressed: () {
-                        _bloc?.add(const HomeExitButtonClicked());
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: LightColorPalette.green,
-                        onPrimary: Colors.white,
-                        textStyle: themeData.textTheme.headline6,
-                        minimumSize: const Size(95, 35),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: circular10,
-                        ),
-                      ),
-                      child: const Text('بله'),
-                    ),
-                    const SizedBox.shrink(),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: LightColorPalette.red,
-                        onPrimary: Colors.white,
-                        textStyle: themeData.textTheme.headline6,
-                        minimumSize: const Size(95, 35),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: circular10,
-                        ),
-                      ),
-                      child: const Text('خیر'),
-                    ),
-                  ],
+                child: ExitDialog(
+                  title: title,
                 ),
               ),
             ),
@@ -248,5 +230,10 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       },
     );
+  }
+
+  void _backToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginScreen.route, (route) => false);
   }
 }
