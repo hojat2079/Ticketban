@@ -10,7 +10,7 @@ clean architecture with Dependency injection
 1. clone and run
    Repository [https://github.com/negarmiralaie/ticketing-website](https://github.com/negarmiralaie/ticketing-website)
 
-2.After that run this command
+2. After that run this command
 
 ```bash
 flutter run
