@@ -2,8 +2,7 @@
 
 ## Description
 
-This is a Ticketing-System application implemented with Flutter. Develop by using Bloc library in
-clean architecture with Dependency injection
+This is a Ticketing-System application implemented with Flutter where developed by using Bloc library in clean architecture with Dependency injection.
 
 ## Project Setup
 
@@ -24,7 +23,6 @@ flutter run
 - shared_preferences
 - equatable
 - flutter_svg
-
 
 ## ScreenShots
 

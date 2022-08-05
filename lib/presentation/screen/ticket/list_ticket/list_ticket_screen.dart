@@ -12,13 +12,14 @@ import 'package:ticketban_mobile/presentation/screen/home/home_route.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/add_ticket/drop_down.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/bloc/list_ticket_bloc.dart';
 import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/toggle_group/custom_toggle_group.dart';
-import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/unanswared_ticket_item.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/unanswered_ticket_item.dart';
 
 class ListTicketScreen extends StatelessWidget {
   static const String route = '/list';
   static const _listTicketPadding =
       56 + (HomeRoute.bottomNavHeight - HomeRoute.bottomNavContainerHeight);
   static const int defaultToggleMenuSelected = 1;
+  static const String defaultDate = '۱۳:۴۳                 ۱۲/۰۳/۱۴۰۰';
 
   const ListTicketScreen({Key? key}) : super(key: key);
 
@@ -137,7 +138,7 @@ class ListTicketScreen extends StatelessWidget {
           ticketTitle: ticket.title,
           ticketType: ticket.type,
           ticketDesc: ticket.desc,
-          ticketDate: '۱۳:۴۳                 ۱۲/۰۳/۱۴۰۰',
+          ticketDate: defaultDate,
           ticketTypeColor: DropDownTicketType.colorItems[ticket.type]!,
         );
       },
