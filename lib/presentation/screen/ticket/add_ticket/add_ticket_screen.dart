@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
@@ -58,10 +59,9 @@ class _AddNewTicketScreenState extends State<AddNewTicketScreen> {
             child: BlocListener<AddTicketBloc, AddTicketState>(
               listener: (context, state) async {
                 if (state is AddTicketError) {
-                  context.showSnackBar(state.error.message);
+                  _addTicketErrorResponse(context, state);
                 } else if (state is AddTicketCreated) {
-                  Navigator.pop(context);
-                  context.showSnackBar('تیکت با موفقیت ساخته شد');
+                  _addTicketCreatedSuccessResponse(context);
                 } else if (state is AddTicketSetNewType) {
                   setNewType(state.value);
                 }
@@ -75,29 +75,51 @@ class _AddNewTicketScreenState extends State<AddNewTicketScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   sizedBoxH24,
+                  //appbar
                   const HomeAppBar(),
+
                   sizedBoxH48,
+
+                  //title text
                   _largeText(themeData, 'ارسال تیکت جدید'),
+
                   sizedBoxH32,
+
+                  //hint type request
                   _descriptionText(themeData, 'نوع درخواست:'),
+
                   sizedBoxH12,
+
+                  //custom drop down
                   DropDownTicketType(
                     onTap: (value) {
-                      _bloc?.add(AddTicketChangeTypeState(value));
+                      _onTapChangeType(value);
                     },
                   ),
+
                   sizedBoxH24,
+
+                  //hint title request
                   _descriptionText(themeData, 'موضوع درخواست:'),
+
                   sizedBoxH12,
+
+                  //text field title request
                   ElevatedTextField(
                     keyboardType: TextInputType.text,
                     hint: 'نوشتن موضوع درخواست...',
                     isPassword: false,
                     controller: _titleController,
                   ),
+
                   sizedBoxH24,
+
+                  //hint description text
                   _descriptionText(themeData, 'متن درخواست:'),
+
                   sizedBoxH12,
+
+                  //text field description request
                   ElevatedTextField(
                     keyboardType: TextInputType.text,
                     hint: 'نوشتن متن درخواست...',
@@ -106,22 +128,34 @@ class _AddNewTicketScreenState extends State<AddNewTicketScreen> {
                     height: 150,
                     controller: _descController,
                   ),
+
                   sizedBoxH24,
+
+                  //hint insert  file
                   _descriptionText(themeData, 'درج فایل'),
+
                   sizedBoxH12,
+
+                  //file component
                   FileComponent(image: Assets.image.svg.file.svg()),
+
                   sizedBoxH48,
+
                   BlocBuilder<AddTicketBloc, AddTicketState>(
                     builder: (context, state) {
                       return state is AddTicketLoading
-                          ? showLoading(themeData.colorScheme.primary)
-                          : GradiantButton(
+                          ?
+                          //show loading for when send request to server
+                          showLoading(themeData.colorScheme.primary)
+                          :
+                          //submit button
+                          GradiantButton(
                               gradient: LightColorPalette.defaultOkButton,
                               onTap: () {
                                 _createTicket(context);
                               },
                               label: 'ارسال',
-                              icon: Assets.image.svg.send.svg(width: 18),
+                              icon: _sendIcon(),
                               textStyle: themeData.textTheme.button,
                               height: homeButtonSizeHeight,
                               width: homeButtonSizeWidth,
@@ -129,7 +163,10 @@ class _AddNewTicketScreenState extends State<AddNewTicketScreen> {
                             );
                     },
                   ),
+
                   sizedBoxH32,
+
+                  //for padding with bottomNav
                   const SizedBox(
                     height: HomeRoute.bottomNavHeight -
                         HomeRoute.bottomNavContainerHeight,
@@ -141,6 +178,21 @@ class _AddNewTicketScreenState extends State<AddNewTicketScreen> {
         ),
       ),
     );
+  }
+
+  SvgPicture _sendIcon() => Assets.image.svg.send.svg(width: 18);
+
+  void _onTapChangeType(String value) {
+    _bloc?.add(AddTicketChangeTypeState(value));
+  }
+
+  void _addTicketErrorResponse(BuildContext context, AddTicketError state) {
+    context.showSnackBar(state.error.message);
+  }
+
+  void _addTicketCreatedSuccessResponse(BuildContext context) {
+    Navigator.pop(context);
+    context.showSnackBar('تیکت با موفقیت ساخته شد');
   }
 
   Widget _largeText(ThemeData themeData, String text) {

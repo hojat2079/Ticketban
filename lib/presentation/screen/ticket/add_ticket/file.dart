@@ -6,13 +6,15 @@ class FileComponent extends StatelessWidget {
   final Widget image;
   final double height;
   final double width;
+  static const double defaultHeight = 125;
+  static const double defaultWidth = 189;
 
   const FileComponent({
     Key? key,
     this.title = 'جهت درج فایل کلیک کنید',
     required this.image,
-    this.height = 125,
-    this.width = 189,
+    this.height = defaultHeight,
+    this.width = defaultWidth,
   }) : super(key: key);
 
   @override
@@ -24,31 +26,37 @@ class FileComponent extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: themeData.colorScheme.surfaceVariant,
-        border: Border.all(
-          color: const Color(
-            0xffEAEAEA,
-          ),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: themeData.colorScheme.inverseSurface,
-            blurRadius: 30,
-          )
-        ],
+        border: _border(),
+        boxShadow: [_fileShadow(themeData)],
         borderRadius: circular18,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            title,
-            style: themeData.textTheme.caption,
-          ),
-          sizedBoxH16,
-          image
-        ],
+        children: [_titleText(themeData), sizedBoxH16, image],
       ),
+    );
+  }
+
+  Border _border() {
+    return Border.all(
+      color: const Color(
+        0xffEAEAEA,
+      ),
+      width: 1,
+    );
+  }
+
+  Text _titleText(ThemeData themeData) {
+    return Text(
+      title,
+      style: themeData.textTheme.caption,
+    );
+  }
+
+  BoxShadow _fileShadow(ThemeData themeData) {
+    return BoxShadow(
+      color: themeData.colorScheme.inverseSurface,
+      blurRadius: 30,
     );
   }
 }

@@ -21,18 +21,8 @@ class ExitDialog extends StatelessWidget {
       ),
       alignment: Alignment.center,
       actionsAlignment: MainAxisAlignment.center,
-      titlePadding: const EdgeInsets.only(
-        top: 24,
-        bottom: 0,
-        right: 16,
-        left: 16,
-      ),
-      actionsPadding: const EdgeInsets.only(
-        top: 20,
-        bottom: 8,
-        right: 16,
-        left: 16,
-      ),
+      titlePadding: _titlePadding(),
+      actionsPadding: _actionPadding(),
       title: Center(
         child: _titleText(themeData),
       ),
@@ -61,6 +51,24 @@ class ExitDialog extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+
+  EdgeInsets _titlePadding() {
+    return const EdgeInsets.only(
+      top: 24,
+      bottom: 0,
+      right: 16,
+      left: 16,
+    );
+  }
+
+  EdgeInsets _actionPadding() {
+    return const EdgeInsets.only(
+      top: 20,
+      bottom: 8,
+      right: 16,
+      left: 16,
     );
   }
 
