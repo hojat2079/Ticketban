@@ -25,6 +25,8 @@ class AuthRoot extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: themeData.colorScheme.background,
       statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: themeData.colorScheme.background,
     ));
 
     return Scaffold(
