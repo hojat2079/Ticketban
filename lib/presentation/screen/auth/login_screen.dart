@@ -26,10 +26,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _passwordController =
-      TextEditingController(text: '1234567890');
-  final TextEditingController _phoneController =
-      TextEditingController(text: '09338503075');
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   @override
   void dispose() {
@@ -48,7 +46,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  RichText _titleContainer(ThemeData themeData) {
+  Widget _titleContainer(ThemeData themeData) {
+    //rich text for handle multiple text with diff style
     return RichText(
       text: TextSpan(children: [
         const TextSpan(text: 'به '),
@@ -72,9 +71,13 @@ class _LoginScreenState extends State<LoginScreen> {
       gradient: LightColorPalette.registerButtonTextGradiant,
       text: 'ثبت نام',
       onTap: () {
-        context.read<AuthBloc>().add(AuthRegisterButtonClickedInLoginPage());
+        _onTapRegisterButton();
       },
     );
+  }
+
+  void _onTapRegisterButton() {
+    context.read<AuthBloc>().add(AuthRegisterButtonClickedInLoginPage());
   }
 
   Widget _loginContainer(ThemeData themeData, Size size) {
@@ -109,27 +112,29 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               sizedBoxH20,
+
+              //title login container
               _titleContainer(themeData),
+
               sizedBoxH24,
+
+              //phone textField
               CustomTextField(
                 controller: _phoneController,
                 keyboardType: TextInputType.phone,
                 hint: 'شماره تلفن',
-                prefixIcon: Padding(
-                  padding: paddingSuffixIcon,
-                  child: Assets.image.svg.phone.svg(width: 24),
-                ),
+                prefixIcon: _startPhoneIcon(),
                 maxLength: 11,
               ),
+
               sizedBoxH16,
+
+              //password textField
               CustomTextField(
                 controller: _passwordController,
                 hint: 'رمز عبور',
                 isPassword: true,
-                prefixIcon: Padding(
-                  padding: paddingSuffixIcon,
-                  child: Assets.image.svg.password.svg(width: 24),
-                ),
+                prefixIcon: _startPasswordIcon(),
                 suffixIcon: _endPasswordIcon(themeData),
               ),
               sizedBoxH24,
@@ -137,18 +142,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  //this widget for symmetric row used.
                   Visibility(
                     visible: false,
                     maintainSize: true,
                     maintainAnimation: true,
                     maintainState: true,
-                    child: Text(
-                      'فراموشی رمز عبور',
-                      style: themeData.textTheme.bodyText2!.apply(
-                          color: themeData.colorScheme.primary,
-                          fontSizeFactor: 0.85),
-                    ),
+                    child: _forgetPasswordText(themeData),
                   ),
+
+                  //for handle change state with bloc pattern used.
                   BlocBuilder<AuthBloc, AuthState>(
                     buildWhen: (previous, current) {
                       return current is AuthLoading ||
@@ -156,34 +159,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     builder: (context, state) {
                       return state is AuthLoading
-                          ? showLoading(themeData.colorScheme.primary)
-                          : GradiantButton(
+                          ?
+                          //show loading after click this button
+                          showLoading(themeData.colorScheme.primary)
+                          :
+                          //submit button
+                          GradiantButton(
                               gradient:
                                   LightColorPalette.loginButtonTextGradiant,
                               onTap: () {
-                                context.read<AuthBloc>().add(AuthLoginClicked(
-                                      password: _passwordController.text,
-                                      phone: _phoneController.text,
-                                    ));
+                                _onTapLoginButton(context);
                               },
                               label: LoginScreen.headText,
                               textStyle: themeData.textTheme.button,
                             );
                     },
                   ),
+
+                  //button for navigate to forget password screen
                   TextButton(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                            const AuthForgetPasswordClicked(),
-                          );
-                    },
-                    child: Text(
-                      'فراموشی رمز عبور',
-                      style: themeData.textTheme.bodyText2!.apply(
-                          color: themeData.colorScheme.primary,
-                          fontSizeFactor: 0.85),
-                    ),
-                  ),
+                      onPressed: () {
+                        context.read<AuthBloc>().add(
+                              const AuthForgetPasswordClicked(),
+                            );
+                      },
+                      child: _forgetPasswordText(themeData)),
                 ],
               ),
               sizedBoxH24,
@@ -191,6 +191,37 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _onTapLoginButton(BuildContext context) {
+    context.read<AuthBloc>().add(
+          AuthLoginClicked(
+            password: _passwordController.text,
+            phone: _phoneController.text,
+          ),
+        );
+  }
+
+  Widget _forgetPasswordText(ThemeData themeData) {
+    return Text(
+      'فراموشی رمز عبور',
+      style: themeData.textTheme.bodyText2!
+          .apply(color: themeData.colorScheme.primary, fontSizeFactor: 0.85),
+    );
+  }
+
+  Widget _startPasswordIcon() {
+    return Padding(
+      padding: paddingSuffixIcon,
+      child: Assets.image.svg.password.svg(width: 24),
+    );
+  }
+
+  Widget _startPhoneIcon() {
+    return Padding(
+      padding: paddingSuffixIcon,
+      child: Assets.image.svg.phone.svg(width: 24),
     );
   }
 
