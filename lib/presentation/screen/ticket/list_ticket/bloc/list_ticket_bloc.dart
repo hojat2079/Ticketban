@@ -7,6 +7,7 @@ import 'package:ticketban_mobile/domain/model/ticket_user.dart';
 import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 
 part 'list_ticket_event.dart';
+
 part 'list_ticket_state.dart';
 
 const allTicketsIndex = 1;
@@ -24,7 +25,7 @@ class ListTicketBloc extends Bloc<ListTicketEvent, ListTicketState> {
     on<ListTicketEvent>(
       (event, emit) async {
         if (event is ListTicketStarted) {
-          await handleStartedEvent(emit);
+          await handleStartedEvent(emit, event.isRefresh);
         } else if (event is ListTicketChangeStatus) {
           await handleChangeStatus(emit, event.index);
         } else if (event is ListTicketClickDeleteTicketButton) {
@@ -34,9 +35,12 @@ class ListTicketBloc extends Bloc<ListTicketEvent, ListTicketState> {
     );
   }
 
-  Future<void> handleStartedEvent(Emitter<ListTicketState> emit) async {
+  Future<void> handleStartedEvent(
+      Emitter<ListTicketState> emit, bool isRefresh) async {
     try {
-      emit(ListTicketLoading());
+      isRefresh
+          ? emit(ListTicketLoadingForRefresh())
+          : emit(ListTicketLoading());
 
       //getAllTicket
       allTickets = await repository

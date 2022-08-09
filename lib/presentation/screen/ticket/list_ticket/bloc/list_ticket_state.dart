@@ -50,3 +50,5 @@ class ListTicketLoadingDeleteTask extends ListTicketState {
   @override
   List<Object> get props => [id];
 }
+
+class ListTicketLoadingForRefresh extends ListTicketState {}
