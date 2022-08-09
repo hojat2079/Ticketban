@@ -7,7 +7,14 @@ abstract class ListTicketEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ListTicketStarted extends ListTicketEvent {}
+class ListTicketStarted extends ListTicketEvent {
+  final bool isRefresh;
+
+  const ListTicketStarted({this.isRefresh = false});
+
+  @override
+  List<Object> get props => [isRefresh];
+}
 
 class ListTicketChangeStatus extends ListTicketEvent {
   final String status;
@@ -20,4 +27,13 @@ class ListTicketChangeStatus extends ListTicketEvent {
 
   @override
   List<Object> get props => [status, index];
+}
+
+class ListTicketClickDeleteTicketButton extends ListTicketEvent {
+  final String ticketId;
+
+  @override
+  List<Object> get props => [ticketId];
+
+  const ListTicketClickDeleteTicketButton(this.ticketId);
 }

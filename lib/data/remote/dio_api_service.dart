@@ -160,7 +160,7 @@ class DioApiService with HttpResponseValidator implements ApiService {
   @override
   Future<bool> deleteTicket(String ticketId) async {
     final response =
-        await dio.delete('${RemoteConstant.deleteTicket}/:$ticketId');
+        await dio.delete('${RemoteConstant.deleteTicket}/$ticketId');
     return validateResponse(response);
   }
 

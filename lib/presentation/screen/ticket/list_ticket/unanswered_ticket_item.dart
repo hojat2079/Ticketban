@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
+import 'package:ticketban_mobile/presentation/screen/ticket/list_ticket/bloc/list_ticket_bloc.dart';
 import 'package:ticketban_mobile/util/extension.dart';
 
 class UnansweredTicketItem extends StatelessWidget {
   final String ticketTitle;
+  final String ticketId;
   final String ticketType;
   final Color ticketTypeColor;
   final String ticketDesc;
@@ -16,7 +20,8 @@ class UnansweredTicketItem extends StatelessWidget {
       required this.ticketType,
       required this.ticketDesc,
       required this.ticketDate,
-      required this.ticketTypeColor})
+      required this.ticketTypeColor,
+      required this.ticketId})
       : super(key: key);
 
   @override
@@ -72,34 +77,54 @@ class UnansweredTicketItem extends StatelessWidget {
   Widget _deleteButton(ThemeData themeData) {
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        borderRadius: circular10,
-        splashColor: themeData.colorScheme.error.withOpacity(0.2),
-        onTap: () {},
-        child: Container(
-          padding: padding9H + padding3V,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: themeData.colorScheme.error,
-              width: 0.7,
-            ),
+      child: BlocBuilder<ListTicketBloc, ListTicketState>(
+        builder: (context, state) {
+          return InkWell(
             borderRadius: circular10,
-          ),
-          child: Row(
-            children: [
-              Assets.image.svg.delete.svg(),
-              sizedBoxW2,
-              Text(
-                'حذف',
-                style: themeData.textTheme.caption!.copyWith(
-                  color: themeData.colorScheme.error,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 10,
-                ),
-              ),
-            ],
-          ),
-        ),
+            highlightColor: themeData.colorScheme.error.withOpacity(0.2),
+            onTap: () {
+              if (state is ListTicketSuccess) {
+                context
+                    .read<ListTicketBloc>()
+                    .add(ListTicketClickDeleteTicketButton(ticketId));
+              }
+            },
+            child:
+                (state is ListTicketLoadingDeleteTask && state.id == ticketId)
+                    ? SizedBox(
+                        width: 36,
+                        child: CupertinoActivityIndicator(
+                          color: themeData.colorScheme.error.withOpacity(0.5),
+                        ),
+                      )
+                    : Container(
+                        padding: padding9H + padding3V,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: themeData.colorScheme.error,
+                            width: 0.7,
+                          ),
+                          borderRadius: circular10,
+                        ),
+                        child: Row(
+                          children: [
+                            Assets.image.svg.delete.svg(),
+                            sizedBoxW2,
+                            Text(
+                              'حذف',
+                              style: themeData.textTheme.caption!.copyWith(
+                                color: themeData.colorScheme.error,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+          );
+        },
+        buildWhen: (p, c) =>
+            (c is ListTicketLoadingDeleteTask || c is ListTicketSuccess),
       ),
     );
   }
