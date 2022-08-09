@@ -33,6 +33,10 @@ class ListTicketScreen extends StatelessWidget {
           instance<TicketUserRepository>(),
         )..add(ListTicketStarted()),
         child: BlocBuilder<ListTicketBloc, ListTicketState>(
+          buildWhen: (p, c) =>
+              c is ListTicketLoading ||
+              c is ListTicketSuccess ||
+              c is ListTicketError,
           builder: (context, state) {
             //success state
             if (state is ListTicketSuccess) {
@@ -139,6 +143,7 @@ class ListTicketScreen extends StatelessWidget {
           ticketType: ticket.type,
           ticketDesc: ticket.desc,
           ticketDate: defaultDate,
+          ticketId: ticket.id,
           ticketTypeColor: DropDownTicketType.colorItems[ticket.type]!,
         );
       },

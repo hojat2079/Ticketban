@@ -21,3 +21,12 @@ class ListTicketChangeStatus extends ListTicketEvent {
   @override
   List<Object> get props => [status, index];
 }
+
+class ListTicketClickDeleteTicketButton extends ListTicketEvent {
+  final String ticketId;
+
+  @override
+  List<Object> get props => [ticketId];
+
+  const ListTicketClickDeleteTicketButton(this.ticketId);
+}

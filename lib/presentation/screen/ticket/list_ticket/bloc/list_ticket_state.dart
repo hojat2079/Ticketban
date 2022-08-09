@@ -41,3 +41,12 @@ class ListTicketError extends ListTicketState {
   @override
   List<Object> get props => [error];
 }
+
+class ListTicketLoadingDeleteTask extends ListTicketState {
+  final String id;
+
+  const ListTicketLoadingDeleteTask(this.id);
+
+  @override
+  List<Object> get props => [id];
+}
