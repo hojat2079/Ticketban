@@ -46,6 +46,9 @@ class $AssetsImageSvgGen {
   /// File path: assets/image/svg/delete.svg
   SvgGenImage get delete => const SvgGenImage('assets/image/svg/delete.svg');
 
+  /// File path: assets/image/svg/empty.svg
+  SvgGenImage get empty => const SvgGenImage('assets/image/svg/empty.svg');
+
   /// File path: assets/image/svg/exit.svg
   SvgGenImage get exit => const SvgGenImage('assets/image/svg/exit.svg');
 

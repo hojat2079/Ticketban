@@ -7,6 +7,7 @@ import 'package:ticketban_mobile/domain/repository/ticket_user_repository.dart';
 import 'package:ticketban_mobile/gen/assets.gen.dart';
 import 'package:ticketban_mobile/presentation/component/dimension.dart';
 import 'package:ticketban_mobile/presentation/component/widget/elevated_textfield.dart';
+import 'package:ticketban_mobile/presentation/component/widget/empty_view.dart';
 import 'package:ticketban_mobile/presentation/component/widget/small_widget.dart';
 import 'package:ticketban_mobile/presentation/screen/home/appbar.dart';
 import 'package:ticketban_mobile/presentation/screen/home/home_route.dart';
@@ -139,26 +140,29 @@ class _ListTicketScreenState extends State<ListTicketScreen> {
           sizedBoxH16,
 
           //searchTextField
-          Padding(
-            padding: padding24H,
-            child: ElevatedTextField(
-              keyboardType: TextInputType.text,
-              hint: 'عنوان یا متن مورد نظر خود راجستجو کنید...',
-              prefixIcon: Padding(
-                padding: padding8L,
-                child: Assets.image.svg.search.svg(),
+          if (state.tickets.isNotEmpty)
+            Padding(
+              padding: padding24H,
+              child: ElevatedTextField(
+                keyboardType: TextInputType.text,
+                hint: 'عنوان یا متن مورد نظر خود راجستجو کنید...',
+                prefixIcon: Padding(
+                  padding: padding8L,
+                  child: Assets.image.svg.search.svg(),
+                ),
+                topPadding: 0,
+                bottomPadding: 0,
+                borderRadius: circular14,
               ),
-              topPadding: 0,
-              bottomPadding: 0,
-              borderRadius: circular14,
             ),
-          ),
 
           sizedBoxH12,
 
           //list ticket
           Expanded(
-            child: _listTickets(state.tickets),
+            child: state.tickets.isNotEmpty
+                ? _listTickets(state.tickets)
+                : _emptyView(),
           ),
         ],
       ),
@@ -201,6 +205,13 @@ class _ListTicketScreenState extends State<ListTicketScreen> {
     return Text(
       text,
       style: themeData.textTheme.headline2,
+    );
+  }
+
+  Widget _emptyView() {
+    return EmptyView(
+      message: 'چیزی برای نمایش وجود ندارد',
+      image: Assets.image.svg.empty.svg(width: 150),
     );
   }
 }
