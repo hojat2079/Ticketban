@@ -6,8 +6,7 @@ This is a Ticketing-System application implemented with Flutter where developed 
 
 ## Project Setup
 
-1. clone and run
-   Repository [https://github.com/negarmiralaie/ticketing-website](https://github.com/negarmiralaie/ticketing-website)
+1. clone and run [this](https://github.com/negarmiralaie/expressjs-ticketing-website) Repository
 
 2. After that run this command
 
